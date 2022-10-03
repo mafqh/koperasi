@@ -20,7 +20,7 @@ class Migration_add_column_fcm_token_and_device_on_users extends CI_Migration {
 			'nip' => array(
 				'type' => 'VARCHAR(100)', 
 				'null' => TRUE,
-				'after'  => 'jabatan',
+				'after'  => 'phone',
 			),
 			'nik' => array(
 				'type' => 'VARCHAR(100)', 

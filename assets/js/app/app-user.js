@@ -25,7 +25,6 @@ define([
             App.initSelect2();
             App.initTable();
             App.initTableClick();
-            App.clearData();
             App.initForm();
             App.onChangeWilayah();
         },
@@ -126,10 +125,10 @@ define([
 
                         $('#address_edit').val(data.data.address);
 
-                        var option_provinsi = "<option value='' disabled selected>Pilih Provinsi</option>";
-                        var option_kabupaten = "<option value='' disabled selected>Pilih Kota / Kabupaten</option>";
-                        var option_kecamatan = "<option value='' disabled selected>Pilih Kecamatan</option>";
-                        var option_kelurahan = "<option value='' disabled selected>Pilih Kelurahan / Desa</option>";
+                        var option_provinsi = "<option value=''>Pilih Provinsi</option>";
+                        var option_kabupaten = "<option value=''>Pilih Kota / Kabupaten</option>";
+                        var option_kecamatan = "<option value=''>Pilih Kecamatan</option>";
+                        var option_kelurahan = "<option value=''>Pilih Kelurahan / Desa</option>";
                         $('.provinsi-id').html(option_provinsi);
                         $('.kabupaten-id').html(option_kabupaten);
                         $('.kecamatan-id').html(option_kecamatan);
@@ -191,17 +190,6 @@ define([
                 })
             });
         },
-        clearData: function() {
-            $('#new_data').on('click', function(event) {
-                $("#form-create")[0].reset();
-                $("#form-create select").val("").trigger('change');
-                $("#form-create #img_preview").attr("src", "");
-
-                var kabupaten_id = $('#provinsi_id_selected').val();
-                $("#form-create select.provinsi-id").val(kabupaten_id).trigger('change').select2({ disabled: 'readonly', width: '100%' });
-                App.onChangeWilayah();
-            });
-        },
         initForm: function() {
             if ($("#form").length > 0) {
                 $("#form").validate({
@@ -214,7 +202,7 @@ define([
                             number: true
                         },
                         email: {
-                            required: true,
+                            required: false,
                             email: true
                         },
                         phone: {
@@ -353,9 +341,9 @@ define([
                 })
                 .done(function(response) {
                     var data = JSON.parse(response);
-                    var option_kabupaten = "<option value='' disabled selected>Pilih Kota / Kabupaten</option>";
-                    var option_kecamatan = "<option value='' disabled selected>Pilih Kecamatan</option>";
-                    var option_kelurahan = "<option value='' disabled selected>Pilih Kelurahan / Desa</option>";
+                    var option_kabupaten = "<option value=''>Pilih Kota / Kabupaten</option>";
+                    var option_kecamatan = "<option value=''>Pilih Kecamatan</option>";
+                    var option_kelurahan = "<option value=''>Pilih Kelurahan / Desa</option>";
                     $('.kabupaten-id').html(option_kabupaten);
                     $('.kecamatan-id').html(option_kecamatan);
                     $('.kelurahan-id').html(option_kelurahan);
@@ -374,14 +362,33 @@ define([
         },
 
         onChangeWilayah: function() {
-            var provinsi_id = $('.provinsi-id').val();
-            if (provinsi_id === null) {
-                $('.provinsi-id').on('select2:select', function() {
-                    App.formDataChangeProvinsi($(this).val());
+            $('.provinsi-id').on('change', function() {
+                var provinsi_id = $(this).val();
+                $.ajax({
+                    url: App.baseUrl + 'wilayah/getKabupaten',
+                    type: 'GET',
+                    data: { id: provinsi_id },
+                })
+                .done(function(response) {
+                    var data = JSON.parse(response);
+                    var option_kabupaten = "<option value=''>Pilih Kabupaten</option>";
+                    var option_kecamatan = "<option value=''>Pilih Kecamatan</option>";
+                    var option_kelurahan = "<option value=''>Pilih Kelurahan / Desa</option>";
+                    $('.kabupaten-id').html(option_kecamatan);
+                    $('.kecamatan-id').html(option_kecamatan);
+                    $('.kelurahan-id').html(option_kelurahan);
+
+                    if (data.status == true) {
+                        for (var i = 0; i < data.data.length; i++) {
+                            option_kabupaten += "<option value=" + data.data[i].id + "> " + data.data[i].name + "</option>";
+                        }
+                    }
+                    $('.kabupaten-id').html(option_kabupaten);
+                })
+                .fail(function() {
+                    console.log("error");
                 });
-            } else {
-                App.formDataChangeProvinsi(provinsi_id);
-            }
+            });
 
             $('.kabupaten-id').on('change', function() {
                 var kabupaten_id = $(this).val();
@@ -392,8 +399,8 @@ define([
                     })
                     .done(function(response) {
                         var data = JSON.parse(response);
-                        var option_kecamatan = "<option value='' disabled selected>Pilih Kecamatan</option>";
-                        var option_kelurahan = "<option value='' disabled selected>Pilih Kelurahan / Desa</option>";
+                        var option_kecamatan = "<option value=''>Pilih Kecamatan</option>";
+                        var option_kelurahan = "<option value=''>Pilih Kelurahan / Desa</option>";
                         $('.kecamatan-id').html(option_kecamatan);
                         $('.kelurahan-id').html(option_kelurahan);
 
@@ -418,7 +425,7 @@ define([
                     })
                     .done(function(response) {
                         var data = JSON.parse(response);
-                        var option_kelurahan = "<option value='' disabled selected>Pilih Kelurahan / Desa</option>";
+                        var option_kelurahan = "<option value=''>Pilih Kelurahan / Desa</option>";
                         $('.kelurahan-id').html(option_kelurahan);
 
                         if (data.status == true) {

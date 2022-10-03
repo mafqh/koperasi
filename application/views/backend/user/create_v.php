@@ -12,15 +12,15 @@
                 <div class="col-6">
                     <div class="mb-3">
                         <label class="form-label">NIP</label>
-                        <input type="text" class="form-control number-nospace" id="nip" placeholder="NIP" name="nip" value="">
+                        <input type="text" class="form-control number-nospace" name="nip" id="nip" placeholder="NIP" value="">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Nama Pengguna</label>
-                        <input type="text" class="form-control text-only" id="first_name" placeholder="Nama Pengguna" name="first_name" value="">
+                        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Nama Pengguna" value="">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">NIK</label>
-                        <input type="text" class="form-control number-nospace" id="nik" placeholder="NIK" name="nik" value="">
+                        <input type="text" class="form-control number-nospace" name="nik" id="nik" placeholder="NIK" value="">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Email</label>
@@ -81,9 +81,9 @@
                     </div>
                     <div class="col-6">
                         <div class="mb-3">
-                            <label class="form-label">Hak Akses</label>
-                            <select class="form-control" id="role_id" name="role_id" placeholder="Hak Akses" data-selectjs="true">
-                                <option value="">Pilih Hak Akses</option>
+                            <label class="form-label">Jabatan</label>
+                            <select class="form-control" id="role_id" name="role_id" placeholder="Jabatan" data-selectjs="true">
+                                <option value="">Pilih Jabatan</option>
                                 <?php if (!empty($roles)) {
                                         foreach ($roles as $key => $value) {
                                 ?>
