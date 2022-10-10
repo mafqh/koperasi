@@ -102,7 +102,7 @@ class CI_Log {
 	 *
 	 * @var array
 	 */
-	protected $_levels = array('CUSTOM' => 1, 'ERROR' => 2, 'DEBUG' => 3, 'INFO' => 4, 'ALL' => 5);
+	protected $_levels = array('ERROR' => 1, 'DEBUG' => 2, 'INFO' => 3, 'ALL' => 4);
 
 	/**
 	 * mbstring.func_overload flag
@@ -118,33 +118,40 @@ class CI_Log {
 	 *
 	 * @return	void
 	 */
-	public function __construct() {
-		$config = &get_config();
+	public function __construct()
+	{
+		$config =& get_config();
 
 		isset(self::$func_overload) OR self::$func_overload = (extension_loaded('mbstring') && ini_get('mbstring.func_overload'));
 
-		$this->_log_path = ($config['log_path'] !== '') ? $config['log_path'] : APPPATH . 'logs/';
+		$this->_log_path = ($config['log_path'] !== '') ? $config['log_path'] : APPPATH.'logs/';
 		$this->_file_ext = (isset($config['log_file_extension']) && $config['log_file_extension'] !== '')
-		? ltrim($config['log_file_extension'], '.') : 'php';
+			? ltrim($config['log_file_extension'], '.') : 'php';
 
 		file_exists($this->_log_path) OR mkdir($this->_log_path, 0755, TRUE);
 
-		if (!is_dir($this->_log_path) OR !is_really_writable($this->_log_path)) {
+		if ( ! is_dir($this->_log_path) OR ! is_really_writable($this->_log_path))
+		{
 			$this->_enabled = FALSE;
 		}
 
-		if (is_numeric($config['log_threshold'])) {
+		if (is_numeric($config['log_threshold']))
+		{
 			$this->_threshold = (int) $config['log_threshold'];
-		} elseif (is_array($config['log_threshold'])) {
+		}
+		elseif (is_array($config['log_threshold']))
+		{
 			$this->_threshold = 0;
 			$this->_threshold_array = array_flip($config['log_threshold']);
 		}
 
-		if (!empty($config['log_date_format'])) {
+		if ( ! empty($config['log_date_format']))
+		{
 			$this->_date_fmt = $config['log_date_format'];
 		}
 
-		if (!empty($config['log_file_permissions']) && is_int($config['log_file_permissions'])) {
+		if ( ! empty($config['log_file_permissions']) && is_int($config['log_file_permissions']))
+		{
 			$this->_file_permissions = $config['log_file_permissions'];
 		}
 	}
@@ -160,93 +167,130 @@ class CI_Log {
 	 * @param	string	$msg 	The error message
 	 * @return	bool
 	 */
-	public function write_log($level, $msg) {
-		if ($this->_enabled === FALSE) {
+	public function write_log($level, $msg)
+	{
+		if ($this->_enabled === FALSE)
+		{
 			return FALSE;
 		}
 
 		$level = strtoupper($level);
 
-		if ((!isset($this->_levels[$level]) OR ($this->_levels[$level] > $this->_threshold))
-			&& !isset($this->_threshold_array[$this->_levels[$level]])) {
+		if (( ! isset($this->_levels[$level]) OR ($this->_levels[$level] > $this->_threshold))
+			&& ! isset($this->_threshold_array[$this->_levels[$level]]))
+		{
 			return FALSE;
 		}
 
-		$filepath = $this->_log_path . 'log-' . date('Y-m-d') . '.' . $this->_file_ext;
+		$filepath = $this->_log_path.'log-'.date('Y-m-d').'.'.$this->_file_ext;
 		$message = '';
 
-		if (!file_exists($filepath)) {
+		if ( ! file_exists($filepath))
+		{
 			$newfile = TRUE;
 			// Only add protection to php files
-			if ($this->_file_ext === 'php') {
+			if ($this->_file_ext === 'php')
+			{
 				$message .= "<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>\n\n";
 			}
 		}
-		if (!$fp = @fopen($filepath, 'ab')) {
+
+		if ( ! $fp = @fopen($filepath, 'ab'))
+		{
 			return FALSE;
 		}
+
 		flock($fp, LOCK_EX);
-// Instantiating DateTime with microseconds appended to initial date is needed for proper support of this format
-		if (strpos($this->_date_fmt, 'u') !== FALSE) {
+
+		// Instantiating DateTime with microseconds appended to initial date is needed for proper support of this format
+		if (strpos($this->_date_fmt, 'u') !== FALSE)
+		{
 			$microtime_full = microtime(TRUE);
 			$microtime_short = sprintf("%06d", ($microtime_full - floor($microtime_full)) * 1000000);
-			$date = new DateTime(date('Y-m-d H:i:s.' . $microtime_short, $microtime_full));
+			$date = new DateTime(date('Y-m-d H:i:s.'.$microtime_short, $microtime_full));
 			$date = $date->format($this->_date_fmt);
-		} else {
+		}
+		else
+		{
 			$date = date($this->_date_fmt);
 		}
+
 		$message .= $this->_format_line($level, $date, $msg);
-		for ($written = 0, $length = self::strlen($message); $written < $length; $written += $result) {if (($result = fwrite($fp, self::substr($message, $written))) === FALSE) {break;}}flock($fp, LOCK_UN);
-		fclose($fp);if (isset($newfile) && $newfile === TRUE) {
+
+		for ($written = 0, $length = self::strlen($message); $written < $length; $written += $result)
+		{
+			if (($result = fwrite($fp, self::substr($message, $written))) === FALSE)
+			{
+				break;
+			}
+		}
+
+		flock($fp, LOCK_UN);
+		fclose($fp);
+
+		if (isset($newfile) && $newfile === TRUE)
+		{
 			chmod($filepath, $this->_file_permissions);
 		}
+
 		return is_int($result);
 	}
+
 	// --------------------------------------------------------------------
+
 	/**
 	 * Format the log line.
 	 *
 	 * This is for extensibility of log formatting
 	 * If you want to change the log format, extend the CI_Log class and override this method
 	 *
-	 * @param string $level The error level
-	 * @param string $date Formatted date string
-	 * @param string $message The log message
-	 * @return string Formatted log line with a new line character at the end
+	 * @param	string	$level 	The error level
+	 * @param	string	$date 	Formatted date string
+	 * @param	string	$message 	The log message
+	 * @return	string	Formatted log line with a new line character at the end
 	 */
-	protected function _format_line($level, $date, $message) {
-		return $level . ' - ' . $date . ' --> ' . $message . PHP_EOL;
+	protected function _format_line($level, $date, $message)
+	{
+		return $level.' - '.$date.' --> '.$message.PHP_EOL;
 	}
+
 	// --------------------------------------------------------------------
+
 	/**
 	 * Byte-safe strlen()
 	 *
-	 * @param string $str
-	 * @return int
+	 * @param	string	$str
+	 * @return	int
 	 */
-	protected static function strlen($str) {
+	protected static function strlen($str)
+	{
 		return (self::$func_overload)
-		? mb_strlen($str, '8bit')
-		: strlen($str);
+			? mb_strlen($str, '8bit')
+			: strlen($str);
 	}
+
 	// --------------------------------------------------------------------
+
 	/**
 	 * Byte-safe substr()
 	 *
-	 * @param string $str
-	 * @param int $start
-	 * @param int $length
-	 * @return string
+	 * @param	string	$str
+	 * @param	int	$start
+	 * @param	int	$length
+	 * @return	string
 	 */
-	protected static function substr($str, $start, $length = NULL) {
-		if (self::$func_overload) {
+	protected static function substr($str, $start, $length = NULL)
+	{
+		if (self::$func_overload)
+		{
 			// mb_substr($str, $start, null, '8bit') returns an empty
 			// string on PHP 5.3
 			isset($length) OR $length = ($start >= 0 ? self::strlen($str) - $start : -$start);
 			return mb_substr($str, $start, $length, '8bit');
 		}
+
 		return isset($length)
-		? substr($str, $start, $length)
-		: substr($str, $start);
+			? substr($str, $start, $length)
+			: substr($str, $start);
 	}
 }
