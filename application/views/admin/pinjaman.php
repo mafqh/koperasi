@@ -31,8 +31,8 @@
                                 <td><?php echo $a->nama_anggota; ?></td>
                                 <td><?php echo date("d-m-Y", strtotime($a->tanggal_pinjaman)); ?></td>
                                 <td><?php echo number_format($a->jumlah_pinjaman); ?></td>
-                                <td><?php echo number_format($a->jumlah_pinjaman); ?></td>
-                                <?php if($a->status == "Lunas"){ ?>
+                                <td><?php echo number_format($a->lama); ?></td>
+                                <?php if($a->status == "lunas"){ ?>
                                     <td><span class="badge badge-success px-4 py-2">Lunas</span></td>
                                 <?php }else{ ?>
                                     <td><span class="badge badge-danger px-4 py-2">Belum Lunas</span></td>
