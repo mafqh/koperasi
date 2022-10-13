@@ -39,7 +39,8 @@
                                 <?php } ?>
                                 <td>
                                     <center>
-                                        <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/pinjaman/updateData/'. $a->id) ?>"><i class="fas fa-pencil"></i> Edit</a>
+                                        <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/pinjaman/updateData/'. $a->id) ?>"><i class="fas fa-edit"></i></a>
+                                        <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger" href="<?php echo base_url('admin/pinjaman/deleteData/'. $a->id) ?>"><i class="fas fa-trash"></i></a>
                                         <a class="btn btn-sm btn-success" href="<?php echo base_url('admin/pinjaman/detailAngsuran/'. $a->id) ?>">Detail Angsuran</a>
                                     </center>
                                 </td>

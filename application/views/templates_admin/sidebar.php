@@ -76,23 +76,6 @@
                     <span>Pinjaman</span></a>
             </li>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="far fa-fw fa-copy"></i>
-                    <span>Angsuran</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="<?php echo base_url('admin/kelolaAngsuran') ?>">Kelola Angsuran</a>
-                        <a class="collapse-item" href="<?php echo base_url('admin/detailAngsuran') ?>">Detail Angsuran</a>
-
-                        
-                    </div>
-                </div>
-            </li>
-
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo base_url('admin/gantiPassword') ?>">
