@@ -46,19 +46,10 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
+                <a class="nav-link" href="<?php echo base_url('anggota/angsuran') ?>">
                     <i class="far fa-fw fa-copy"></i>
-                    <span>Angsuran</span>
+                    <span>Detail Angsuran</span>
                 </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="<?php echo base_url('anggota/kelolaAngsuran') ?>">Membayar Angsuran</a>
-                        <a class="collapse-item" href="<?php echo base_url('anggota/detailAngsuran') ?>">Detail Angsuran</a>
-
-                        
-                    </div>
-                </div>
             </li>
             
             <!-- Nav Item - Dashboard -->

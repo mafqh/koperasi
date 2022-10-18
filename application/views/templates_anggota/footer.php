@@ -1,5 +1,6 @@
                 <!-- Footer -->
-            <footer class="sticky-footer bg-white fixed-bottom">
+            <footer class="sticky-footer bg-white">
+                <!-- fixed-bottom -->
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Copyright &copy; Koperasi Bogor Gading Residence 2022</span>

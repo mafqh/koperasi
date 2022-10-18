@@ -4,8 +4,8 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800"><?php echo $title ?></h1>
     </div>
-<?php $nominal = 10000; ?>
-    <div class="alert alert-success font-weight-bold mb-4" style="width: 65%">Jumlah Biaya Administrasi yang harus dibayar <?= "Rp " . number_format($nominal,0,',','.'); ?></div>
+<?php $nominal = 200000; ?>
+    <div class="alert alert-success font-weight-bold mb-4" style="width: 65%">Jumlah Simpanan Wajib yang harus dibayar <?= "Rp " . number_format($nominal,0,',','.'); ?></div>
 
 <table class="table table-striped table-bordered">
 <thead>

@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Lama Pinjaman</label>
+                    <label>Lama Pinjaman (Bulan)</label>
                     <input type="number" name="lama" class="form-control">
                     <?php echo form_error('lama', '<div class="text-small text-danger"> </div>') ?>
                 </div>

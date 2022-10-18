@@ -53,22 +53,6 @@
                 </div>
             </li>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo1"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-file"></i>
-                    <span>Validasi Pembayaran</span>
-                </a>
-                <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="<?php echo base_url('admin/validasiSimpananPokok/validasiPembayaran/sp') ?>">Biaya Administrasi</a>
-                        <a class="collapse-item" href="<?php echo base_url('admin/simpananWajib/simpanan/sw') ?>">Simpanan Wajib</a>
-                        <a class="collapse-item" href="<?php echo base_url('admin/simpananSukarela/simpanan/ss') ?>">Simpanan Tabungan</a>
-                    </div>
-                </div>
-            </li>
-
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo base_url('admin/pinjaman') ?>">

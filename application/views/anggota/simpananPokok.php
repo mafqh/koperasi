@@ -6,8 +6,7 @@
     </div>
 
     <?php echo $this->session->flashdata('pesan') ?>
-    <a class="mb-2 mt-2 btn btn-sm btn-success" href="<?php echo base_url('anggota/simpananPokok/tambahSimpananPokok') ?>"><i class="fas fa-plus"></i> Biaya Administrasi</a>
-
+    
         <!-- Begin Page Content -->
     <table class="table table-striped table-bordered" id="myTable">
         <tr>
