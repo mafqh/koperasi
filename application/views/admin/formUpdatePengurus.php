@@ -80,14 +80,6 @@
                     <?php echo form_error('photo', '<div class="text-small text-danger"></div>') ?>
                 </div>
 
-                <div class="form-group">
-                    <label>Hak Akses</label>
-                    <select name="hak_akses" class="form-control">
-                        <option <?=$p->hak_akses==1?'selected':''; ?> value="1">Admin</option>
-                        <option <?=$p->hak_akses==2?'selected':''; ?> value="2">Anggota</option>
-                    </select>
-                </div>
-
                 <button type="submit" class="btn btn-primary">Simpan</button>
             
             </form>

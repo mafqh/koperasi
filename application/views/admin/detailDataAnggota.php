@@ -62,7 +62,7 @@
                             <td><?php echo date('d - M - Y', strtotime($a->tanggal_masuk)) ?></td>
                         </tr>
                         <tr>
-                            <td>Alamat Pengurus</td>
+                            <td>Alamat Anggota</td>
                             <td>:</td>
                             <td><?php echo $a->alamat_anggota ?></td>
                         </tr>

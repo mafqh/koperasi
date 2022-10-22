@@ -79,15 +79,6 @@
                     <?php echo form_error('photo', '<div class="text-small text-danger"></div>') ?>
                 </div>
 
-                <div class="form-group">
-                    <label>Hak Akses</label>
-                    <select name="hak_akses" class="form-control">
-                        <option value="">--Pilih Hak Akses--</option>
-                        <option value="1">Admin</option>
-                        <option value="2">Anggota</option>
-                    </select>
-                </div>
-
                 <button type="submit" class="btn btn-primary">Simpan</button>
             
             </form>

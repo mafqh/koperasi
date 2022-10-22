@@ -7,10 +7,7 @@
 
     <div class="card"  style="width: 60%; margin-bottom:100px">
         <div class="card-body">
-
             <form method="POST" action="<?php echo base_url('admin/dataPengurus/tambahDataAksi') ?>" enctype="multipart/form-data">
-            
-
                 <div class="form-group">
                     <label>No. Anggota</label>
                     <input type="number" name="nik" class="form-control">
@@ -78,15 +75,6 @@
                     <label>Photo</label>
                     <input type="file" name="photo" class="form-control">
                     <?php echo form_error('photo', '<div class="text-small text-danger"></div>') ?>
-                </div>
-
-                <div class="form-group">
-                    <label>Hak Akses</label>
-                    <select name="hak_akses" class="form-control">
-                        <option value="">--Pilih Hak Akses--</option>
-                        <option value="1">Admin/Pengurus</option>
-                        <option value="2">User/Anggota</option>
-                    </select>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Simpan</button>

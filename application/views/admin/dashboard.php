@@ -75,10 +75,10 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 Total Angsuran</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo number_format($total_angsuran); ?></div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                            <i class="fas fa-credit-card fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>

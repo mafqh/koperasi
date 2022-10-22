@@ -32,8 +32,15 @@ class Dashboard extends CI_Controller{
 
         $saldo_simpanan_wajib = $this->koperasiModel->get_data_count('simpanan_wajib', 'jumlah')->row()->total;
         $saldo += $saldo_simpanan_wajib;
+        
+        $total_angsuran = 0;
+        $total_pinjaman = $this->koperasiModel->get_data_count('data_pinjaman', 'jumlah_pinjaman')->row()->total;
+        $total_angsuran = $this->koperasiModel->get_data_count('data_angsuran', 'jumlah_angsuran')->row()->total;
+        $total_angsuran = $total_pinjaman - $total_angsuran;
+        
+        $saldo -= $total_angsuran;
         $data['saldo'] = $saldo;
-
+        $data['total_angsuran'] = $total_angsuran;
         $this->load->view('templates_admin/header', $data);
         $this->load->view('templates_admin/sidebar');
         $this->load->view('admin/dashboard', $data);

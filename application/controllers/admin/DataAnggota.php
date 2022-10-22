@@ -43,11 +43,12 @@ class DataAnggota extends CI_Controller{
             $this->tambahData();
         }else{
             $nik             = $this->input->post('nik');
+            $alamat_anggota  = $this->input->post('alamat_anggota');
+            $no_telp         = $this->input->post('no_telp');
             $nama_anggota    = $this->input->post('nama_anggota');
             $jenis_kelamin   = $this->input->post('jenis_kelamin');
             $tanggal_masuk   = $this->input->post('tanggal_masuk');
             $status          = $this->input->post('status');
-            $hak_akses       = $this->input->post('hak_akses');
             $username        = $this->input->post('username');
             $password        = md5($this->input->post('password'));
             $photo           = $_FILES['photo']['name'];
@@ -64,11 +65,13 @@ class DataAnggota extends CI_Controller{
 
             $data = array(
                 'nik'            => $nik,
+                'alamat_anggota' => $alamat_anggota,
+                'no_telp'        => $no_telp,
                 'nama_anggota'   => $nama_anggota,
                 'jenis_kelamin'  => $jenis_kelamin,
                 'tanggal_masuk'  => $tanggal_masuk,
                 'status'         => $status,
-                'hak_akses'      => $hak_akses,
+                'hak_akses'      => 2,
                 'username'       => $username,
                 'password'       => $password,
                 'photo'          => $photo,
@@ -123,7 +126,6 @@ class DataAnggota extends CI_Controller{
             $jenis_kelamin   = $this->input->post('jenis_kelamin');
             $tanggal_masuk   = $this->input->post('tanggal_masuk');
             $status          = $this->input->post('status');
-            $hak_akses       = $this->input->post('hak_akses');
             $username        = $this->input->post('username');
             $status          = $this->input->post('status');
             $photo           = $_FILES['photo']['name'];
@@ -148,7 +150,7 @@ class DataAnggota extends CI_Controller{
                 'jenis_kelamin'  => $jenis_kelamin,
                 'tanggal_masuk'  => $tanggal_masuk,
                 'status'         => $status,
-                'hak_akses'      => $hak_akses,
+                'hak_akses'      => 2,
                 'username'       => $username,
             );
 

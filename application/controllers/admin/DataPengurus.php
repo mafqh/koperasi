@@ -50,7 +50,6 @@ class DataPengurus extends CI_Controller{
             $jenis_kelamin   = $this->input->post('jenis_kelamin');
             $tanggal_masuk   = $this->input->post('tanggal_masuk');
             $status          = $this->input->post('status');
-            $hak_akses       = $this->input->post('hak_akses');
             $username        = $this->input->post('username');
             $password        = md5($this->input->post('password'));
             $photo           = $_FILES['photo']['name'];
@@ -73,7 +72,7 @@ class DataPengurus extends CI_Controller{
                 'jenis_kelamin'  => $jenis_kelamin,
                 'status'        => $status,
                 'tanggal_masuk'  => $tanggal_masuk,
-                'hak_akses'      => $hak_akses,
+                'hak_akses'      => 1,
                 'username'       => $username,
                 'password'       => $password,
                 'photo'          => $photo,
@@ -130,7 +129,6 @@ class DataPengurus extends CI_Controller{
             $jenis_kelamin   = $this->input->post('jenis_kelamin');
             $tanggal_masuk   = $this->input->post('tanggal_masuk');
             $jabatan         = $this->input->post('jabatan');
-            $hak_akses       = $this->input->post('hak_akses');
             $username        = $this->input->post('username');
             $status          = $this->input->post('status');
             $photo           = $_FILES['photo']['name'];
@@ -155,7 +153,7 @@ class DataPengurus extends CI_Controller{
                 'jenis_kelamin'  => $jenis_kelamin,
                 'status'         => $status,
                 'tanggal_masuk'  => $tanggal_masuk,
-                'hak_akses'      => $hak_akses,
+                'hak_akses'      => 1,
                 'username'       => $username,
             );
 
