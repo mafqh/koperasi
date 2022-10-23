@@ -16,7 +16,7 @@ class SimpananSukarela extends CI_Controller{
         }
     }
 
-    public function simpanan($jenis)
+    public function simpanan()
     {
 
         $data['title'] = "Simpanan Tabungan";

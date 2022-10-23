@@ -16,10 +16,10 @@ class SimpananPokok extends CI_Controller{
         }
     }
 
-    public function simpanan($jenis)
+    public function simpanan()
     {
         $data['title'] = "Biaya Administrasi";
-        $data['jenis'] = $this->koperasiModel->get_data('data_anggota')->result();
+        $data['jenis'] = $this->koperasiModel->get_data_biaya_administrasi()->result();
         $this->load->view('templates_admin/header', $data);
         $this->load->view('templates_admin/sidebar');
         $this->load->view('admin/SimpananPokok', $data);
@@ -55,10 +55,9 @@ class SimpananPokok extends CI_Controller{
 
     public function detailSimpananPokok()
     {
-        $jenis = $this->uri->segment(4);
-        $anggota = $this->uri->segment(5);
+        $anggota = $this->uri->segment(4);
         $data['title'] = "Detail Simpanan Pokok";
-        $data['anggota'] = $this->koperasiModel->get_data_by_anggota($jenis,$anggota)->result();
+        $data['anggota'] = $this->koperasiModel->get_data_administrasi_by_anggota($anggota)->result();
         $this->load->view('templates_admin/header', $data);
         $this->load->view('templates_admin/sidebar');
         $this->load->view('admin/formDetailSimpananPokok', $data);
@@ -66,7 +65,7 @@ class SimpananPokok extends CI_Controller{
     }
 
     public function editSimpananPokok() {
-        $id_simpanan = $this->uri->segment(5);
+        $id_simpanan = $this->uri->segment(4);
         $data['simpanan'] = $this->koperasiModel->getDataSimpanan($id_simpanan);
         $data['title'] = "Edit Simpanan Pokok";
         $this->load->view('templates_admin/header', $data);
@@ -82,7 +81,7 @@ class SimpananPokok extends CI_Controller{
         $this->db->set('jumlah', $jumlah);
         $this->db->where('id_biaya_administrasi', $id);
         $this->db->update('biaya_administrasi');
-        redirect('admin/SimpananPokok/detailSimpananPokok/sp/'.$id_anggota);
+        redirect('admin/SimpananPokok/detailSimpananPokok/'.$id_anggota);
     }
 
     public function deleteData($id, $id_anggota)
@@ -95,7 +94,7 @@ class SimpananPokok extends CI_Controller{
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>');
-            redirect('admin/simpananPokok/detailSimpananPokok/sp/'.$id_anggota);
+            redirect('admin/simpananPokok/detailSimpananPokok/'.$id_anggota);
     }
 }
 

@@ -16,7 +16,7 @@ class SimpananWajib extends CI_Controller{
         }
     }
 
-    public function simpanan($jenis)
+    public function simpanan()
     {
         $data['title'] = "Simpanan Wajib";
         $data['jenis'] = $this->koperasiModel->get_data('data_anggota')->result();

@@ -10,8 +10,7 @@
             <form method="POST" action="<?php echo base_url('admin/SimpananPokok/update') ?>">
 
             <?php
-            $jenis = $this->uri->segment(4);
-            $anggota = $this->uri->segment(5); 
+            $anggota = $this->uri->segment(4); 
             ?>
             <div class="form-group">
                 <label>Jumlah</label>
@@ -21,7 +20,7 @@
             </div>
 
             <button type="submit" class="btn btn-success">Simpan</button>
-            <!-- <a href="<?php echo base_url() ?>Admin/SimpananPokok/detailSimpananPokok/<?php echo $jenis ?>/<?php echo $simpanan->id_anggota ?>" class="btn btn-danger">Batal</a> -->
+            <!-- <a href="<?php echo base_url() ?>Admin/SimpananPokok/detailSimpananPokok/<?php echo $simpanan->id_anggota ?>" class="btn btn-danger">Batal</a> -->
             </form>
         </div>
     </div>

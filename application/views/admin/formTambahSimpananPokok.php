@@ -10,11 +10,9 @@
             <form method="POST" action="<?php echo base_url('admin/SimpananPokok/Tambah') ?>">
 
             <?php
-            $jenis = $this->uri->segment(4);
-            $anggota = $this->uri->segment(5); ?>
+            $anggota = $this->uri->segment(4); ?>
             <div class="form-group">
                 <label>Jumlah</label>
-                <input type="hidden" name="jenis_simpanan" value= <?= $jenis ?>  >
                 <input type="hidden" name="anggota" value=" <?= $anggota ?> " >
                 <input type="number" name="jumlah" class="form-control" placeholder="Masukan jumlah simpanan pokok">
             </div>

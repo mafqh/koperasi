@@ -88,6 +88,24 @@ class KoperasiModel extends CI_model{
         $this->db->join('data_anggota','data_pinjaman.id_anggota = data_anggota.id_anggota', 'INNER');
         return $this->db->get();
     }
+
+    public function get_data_biaya_administrasi()
+    {
+        $this->db->select('data_anggota.*, SUM(biaya_administrasi.jumlah) as total');
+        $this->db->from('data_anggota');
+        $this->db->join('biaya_administrasi','biaya_administrasi.id_anggota = data_anggota.id_anggota', 'LEFT');
+        $this->db->group_by('data_anggota.id_anggota');
+        return $this->db->get();
+    }
+    
+    public function get_data_administrasi_by_anggota($anggota){
+        $this->db->select('*');
+        $this->db->from('biaya_administrasi');
+        $this->db->join('data_anggota','biaya_administrasi.id_anggota = data_anggota.id_anggota', 'INNER');
+        $this->db->where('biaya_administrasi.id_anggota', $anggota);
+        $this->db->where('biaya_administrasi.status',1);
+        return $this->db->get();
+    }
 }
 
 ?>

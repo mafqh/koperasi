@@ -24,14 +24,28 @@
                     <td><?php echo $no++ ?></td>
                     <td><?php echo $a->nik ?></td>
                     <td><?php echo $a->nama_anggota ?></td>
-                    <td>belum</td>
-                    <td>belum</td>
+                    <?php 
+                        $status = "lunas";
+                        $piutang = 0;
+                        if($a->total < 20000){
+                            $piutang = 20000 - $a->total;
+                            $status = "belum lunas";
+                        }
+                    ?>
+                    <td><?php echo "Rp " . number_format($piutang,0,',','.'); ?></td>
+                    <?php if($status == "lunas"){ ?>
+                        <td><span class="badge badge-success px-4 py-2">Lunas</span></td>
+                    <?php }else{ ?>
+                        <td><span class="badge badge-danger px-4 py-2">Belum Lunas</span></td>
+                    <?php } ?>
                     <td>
-                        <center>
-                            <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/simpananPokok/tambahSimpananPokok/'. $jenis_simpanan .'/'. $a->id_anggota) ?>"><i class="fas fa-plus"></i> Biaya Administrasi</a>
-    
-                            <a class="btn btn-sm btn-success" href="<?php echo base_url('admin/simpananPokok/detailSimpananPokok/'. $jenis_simpanan .'/'. $a->id_anggota) ?>">Detail Biaya Administrasi</a>
-                        </center>
+                        <?php if($status == "belum lunas"){ ?>
+                            <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/simpananPokok/tambahSimpananPokok/'. $a->id_anggota) ?>"><i class="fas fa-plus"></i> Biaya Administrasi</a>
+                        <?php } ?>
+                            
+                        <?php if($piutang != 20000){ ?>
+                            <a class="btn btn-sm btn-success" href="<?php echo base_url('admin/simpananPokok/detailSimpananPokok/'. $a->id_anggota) ?>">Detail Biaya Administrasi</a>
+                        <?php } ?>
                     </td>
     
                 </tr>
