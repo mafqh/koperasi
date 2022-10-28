@@ -24,16 +24,29 @@
                     <td><?php echo $no++ ?></td>
                     <td><?php echo $a->nik ?></td>
                     <td><?php echo $a->nama_anggota ?></td>
-                    <td>belum</td>
-                    <td>belum</td>
+                    <?php 
+                        $status = "lunas";
+                        $piutang = 0;
+                        if($a->total < 200000){
+                            $piutang = 200000 - $a->total;
+                            $status = "belum lunas";
+                        }
+                    ?>
+                    <td><?php echo "Rp " . number_format($piutang,0,',','.'); ?></td>
+                    <?php if($status == "lunas"){ ?>
+                        <td><span class="badge badge-success px-4 py-2">Lunas</span></td>
+                    <?php }else{ ?>
+                        <td><span class="badge badge-danger px-4 py-2">Belum Lunas</span></td>
+                    <?php } ?>
                     <td>
-                        <center>
-                            <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/simpananWajib/tambahSimpananWajib/'. $jenis_simpanan .'/'. $a->id_anggota) ?>"><i class="fas fa-plus"></i> Simpanan Wajib</a>
-    
-                            <a class="btn btn-sm btn-success" href="<?php echo base_url('admin/simpananWajib/detailSimpananWajib/'. $jenis_simpanan .'/'. $a->id_anggota) ?>">Detail Simpanan Wajib</a>
-                        </center>
+                        <?php if($status == "belum lunas"){ ?>
+                            <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/simpananWajib/tambahSimpananWajib/'. $a->id_anggota) ?>"><i class="fas fa-plus"></i> Simpanan Wajib</a>
+                        <?php } ?>
+                            
+                        <?php if($piutang != 20000){ ?>
+                            <a class="btn btn-sm btn-success" href="<?php echo base_url('admin/simpananWajib/detailSimpananWajib/'. $a->id_anggota) ?>">Detail Simpanan Wajib</a>
+                        <?php } ?>
                     </td>
-    
                 </tr>
             <?php endforeach; ?>
         </tbody>

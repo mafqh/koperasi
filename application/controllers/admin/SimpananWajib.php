@@ -19,7 +19,7 @@ class SimpananWajib extends CI_Controller{
     public function simpanan()
     {
         $data['title'] = "Simpanan Wajib";
-        $data['jenis'] = $this->koperasiModel->get_data('data_anggota')->result();
+        $data['jenis'] = $this->koperasiModel->get_data_simpanan_wajib()->result();
         $this->load->view('templates_admin/header', $data);
         $this->load->view('templates_admin/sidebar');
         $this->load->view('admin/simpananWajib', $data);
@@ -37,8 +37,7 @@ class SimpananWajib extends CI_Controller{
 
     public function Tambah() {
         $data = [];
-        $jenis = $this->input->post('jenis_simpanan');
-
+        
         $data = [
             'id_anggota' => $this->input->post('anggota'),
             'jumlah' => $this->input->post('jumlah'),
@@ -50,15 +49,14 @@ class SimpananWajib extends CI_Controller{
             $data['status'] = 0;
         }
         $this->db->insert('simpanan_wajib', $data);
-        redirect('admin/SimpananWajib/simpanan/' .$jenis);
+        redirect('admin/SimpananWajib/simpanan/' .$this->input->post('anggota'));
     }
 
     public function detailSimpananWajib()
     {
-        $jenis = $this->uri->segment(4);
-        $anggota = $this->uri->segment(5);
+        $anggota = $this->uri->segment(4);
         $data['title'] = "Detail Simpanan Wajib";
-        $data['anggota'] = $this->koperasiModel->get_data_by_anggota($jenis,$anggota)->result();
+        $data['anggota'] = $this->koperasiModel->get_data_wajib_by_anggota($anggota)->result();
         $this->load->view('templates_admin/header', $data);
         $this->load->view('templates_admin/sidebar');
         $this->load->view('admin/formDetailSimpananWajib', $data);
@@ -66,8 +64,8 @@ class SimpananWajib extends CI_Controller{
     }
 
     public function editSimpananWajib() {
-        $id_simpanan = $this->uri->segment(5);
-        $data['simpanan'] = $this->koperasiModel->getDataSimpanan($id_simpanan);
+        $id_simpanan = $this->uri->segment(4);
+        $data['simpanan'] = $this->koperasiModel->getDataSimpananWajib($id_simpanan);
         $data['title'] = "Edit Simpanan Wajib";
         $this->load->view('templates_admin/header', $data);
         $this->load->view('templates_admin/sidebar');
@@ -82,7 +80,7 @@ class SimpananWajib extends CI_Controller{
         $this->db->set('jumlah', $jumlah);
         $this->db->where('id_simpanan_wajib', $id);
         $this->db->update('simpanan_wajib');
-        redirect('admin/SimpananPokok/detailSimpananWajib/sw/'.$id_anggota);
+        redirect('admin/SimpananWajib/detailSimpananWajib/'.$id_anggota);
     }
 
     public function deleteData($id, $id_anggota)
@@ -95,7 +93,7 @@ class SimpananWajib extends CI_Controller{
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>');
-            redirect('admin/simpananPokok/detailSimpananWajib/sw/'.$id_anggota);
+            redirect('admin/simpananWajib/detailSimpananWajib/'.$id_anggota);
     }
 }
 

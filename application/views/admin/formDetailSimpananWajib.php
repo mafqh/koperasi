@@ -35,12 +35,12 @@
         <td><?= "Rp " . number_format($data->jumlah,0,',','.'); ?></td>
         <td><?= date('d - M - Y', strtotime($data->tanggal)) ?></td>
         <td>
-                    <center>
-                        <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/simpananWajin/editSimpananWajib/sw/'.$data->id_biaya_administrasi) ?>"><i class="fas fa-edit"></i> Edit</a>
+            <center>
+                <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/simpananWajib/editSimpananWajib/'.$data->id_simpanan_wajib) ?>"><i class="fas fa-edit"></i> Edit</a>
 
-                        <a class="btn btn-sm btn-danger" onclick="return confirm('yakin menghapus data ?')" href="<?php echo base_url('admin/simpananWajib/deleteData/'.$data->id_biaya_administrasi.'/'.$data->id_anggota) ?>">Hapus</a>
-                    </center>
-                </td>
+                <a class="btn btn-sm btn-danger" onclick="return confirm('yakin menghapus data ?')" href="<?php echo base_url('admin/simpananWajib/deleteData/'.$data->id_simpanan_wajib.'/'.$data->id_anggota) ?>">Hapus</a>
+            </center>
+        </td>
 
     </tr>
 

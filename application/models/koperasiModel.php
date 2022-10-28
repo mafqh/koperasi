@@ -74,6 +74,10 @@ class KoperasiModel extends CI_model{
         return $this->db->get_where('biaya_administrasi',['id_biaya_administrasi'=>$id_simpanan])->row();
     }
 
+    public function getDataSimpananWajib($id_simpanan){
+        return $this->db->get_where('simpanan_wajib',['id_simpanan_wajib'=>$id_simpanan])->row();
+    }
+
     public function get_data_count($table, $field, $where = []){
         $this->db->select('SUM('.$field.') as total');
         $this->db->from($table);
@@ -104,6 +108,24 @@ class KoperasiModel extends CI_model{
         $this->db->join('data_anggota','biaya_administrasi.id_anggota = data_anggota.id_anggota', 'INNER');
         $this->db->where('biaya_administrasi.id_anggota', $anggota);
         $this->db->where('biaya_administrasi.status',1);
+        return $this->db->get();
+    }
+
+    public function get_data_simpanan_wajib()
+    {
+        $this->db->select('data_anggota.*, SUM(simpanan_wajib.jumlah) as total');
+        $this->db->from('data_anggota');
+        $this->db->join('simpanan_wajib','simpanan_wajib.id_anggota = data_anggota.id_anggota', 'LEFT');
+        $this->db->group_by('data_anggota.id_anggota');
+        return $this->db->get();
+    }
+    
+    public function get_data_wajib_by_anggota($anggota){
+        $this->db->select('*');
+        $this->db->from('simpanan_wajib');
+        $this->db->join('data_anggota','simpanan_wajib.id_anggota = data_anggota.id_anggota', 'INNER');
+        $this->db->where('simpanan_wajib.id_anggota', $anggota);
+        $this->db->where('simpanan_wajib.status',1);
         return $this->db->get();
     }
 }
