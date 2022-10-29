@@ -27,8 +27,9 @@ class Dashboard extends CI_Controller{
         $saldo_administrasi = $this->koperasiModel->get_data_count('biaya_administrasi', 'jumlah')->row()->total;
         $saldo += $saldo_administrasi;
         
-        $saldo_simpanan = $this->koperasiModel->get_data_count('data_simpanan', 'jumlah')->row()->total;
-        $saldo += $saldo_simpanan;
+        $saldo_simpanan_tabungan    = $this->koperasiModel->get_data_count('simpanan_tabungan', 'jumlah', ['jenis_simpanan' => 'pemasukan'])->row()->total;
+        $saldo_simpanan_pengeluaran = $this->koperasiModel->get_data_count('simpanan_tabungan', 'jumlah', ['jenis_simpanan' => 'pengeluaran'])->row()->total;
+        $saldo += ($saldo_simpanan_tabungan - $saldo_simpanan_pengeluaran);
 
         $saldo_simpanan_wajib = $this->koperasiModel->get_data_count('simpanan_wajib', 'jumlah')->row()->total;
         $saldo += $saldo_simpanan_wajib;
