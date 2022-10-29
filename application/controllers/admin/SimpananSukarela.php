@@ -20,7 +20,7 @@ class SimpananSukarela extends CI_Controller{
     {
 
         $data['title'] = "Simpanan Tabungan";
-        $data['jenis'] = $this->koperasiModel->get_data('data_anggota')->result();
+        $data['jenis'] = $this->koperasiModel->get_data_simpanan_tabungan()->result();
         $this->load->view('templates_admin/header', $data);
         $this->load->view('templates_admin/sidebar');
         $this->load->view('admin/simpananSukarela', $data);

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 20, 2022 at 10:19 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Waktu pembuatan: 29 Okt 2022 pada 02.08
+-- Versi server: 10.4.22-MariaDB
+-- Versi PHP: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `biaya_administrasi`
+-- Struktur dari tabel `biaya_administrasi`
 --
 
 CREATE TABLE `biaya_administrasi` (
@@ -36,16 +36,27 @@ CREATE TABLE `biaya_administrasi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `biaya_administrasi`
+-- Dumping data untuk tabel `biaya_administrasi`
 --
 
 INSERT INTO `biaya_administrasi` (`id_biaya_administrasi`, `id_anggota`, `tanggal`, `jumlah`, `status`) VALUES
-(22, 1, '2022-10-14', 20000, 1);
+(8, 1, '2022-09-08', 2000, 1),
+(11, 1, '2022-09-08', 8000, 1),
+(12, 1, '2022-09-08', 5000, 1),
+(13, 1, '2022-09-08', 6000, 0),
+(15, 4, '2022-09-17', 21000, 1),
+(16, 1, '2022-09-19', 2000, 1),
+(17, 1, '2022-10-03', 20000, 1),
+(18, 1, '2022-10-10', 200000, 1),
+(19, 1, '2022-10-10', 2000000, 1),
+(21, 18, '2022-10-24', 15000, 1),
+(22, 17, '2022-10-24', 20000, 1),
+(23, 18, '2022-10-24', 5000, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `data_anggota`
+-- Struktur dari tabel `data_anggota`
 --
 
 CREATE TABLE `data_anggota` (
@@ -64,22 +75,21 @@ CREATE TABLE `data_anggota` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `data_anggota`
+-- Dumping data untuk tabel `data_anggota`
 --
 
 INSERT INTO `data_anggota` (`id_anggota`, `nik`, `nama_anggota`, `alamat_anggota`, `no_telp`, `jenis_kelamin`, `status`, `tanggal_masuk`, `photo`, `hak_akses`, `username`, `password`) VALUES
-(1, '01', 'Ujang Bustomi', 'Komplek Pertanian Loji, Kel. Loji, Kec. Bogor Barat, Kota Bogor', '01283123', 'Laki-laki', '4', '2022-08-02', 'img_avatar31.png', 2, 'Ujang', '202cb962ac59075b964b07152d234b70'),
-(3, '02', 'Hendi Hidayat', 'Kota Bogorrrrrrrr', '021xxx', 'Laki-laki', '4', '2022-08-01', 'img_avatar13.png', 2, 'hendi', '202cb962ac59075b964b07152d234b70'),
-(4, '03', 'Dodi Setiawan', 'Kota Bogorrrrrrrr', '021xxxx', 'Laki-laki', '4', '2022-08-08', 'img_avatar32.png', 2, 'dodi', '202cb962ac59075b964b07152d234b70'),
+(1, '123', 'Ujang Bustomi', 'Komplek Pertanian Loji, Kel. Loji, Kec. Bogor Barat, Kota Bogor', '01283123', 'Laki-laki', '4', '2022-08-02', 'img_avatar31.png', 2, 'Ujang', '202cb962ac59075b964b07152d234b70'),
+(3, '123', 'Hendi', 'Kota Bogorrrrrrrr', '021xxx', 'Laki-laki', '4', '2022-08-01', 'img_avatar13.png', 2, 'hendi', '202cb962ac59075b964b07152d234b70'),
+(4, '123', 'Dodi', 'Kota Bogorrrrrrrr', '021xxxx', 'Laki-laki', '4', '2022-08-08', 'img_avatar32.png', 2, 'dodi', '202cb962ac59075b964b07152d234b70'),
 (16, '01', 'Dini', 'Komplek Pertanian Loji, Kel. Loji, Kec. Bogor Barat, Kota Bogor', '021xxx', 'Perempuan', '1', '2022-08-28', 'img_avatar26.png', 1, 'dini', '202cb962ac59075b964b07152d234b70'),
-(17, '04', 'Farhan Maulana', 'Komplek Pertanian Loji, Kel. Loji, Kec. Bogor Barat, Kota Bogor', '021xxx', 'Laki-laki', '4', '2022-10-15', 'img_avatar19.png', 2, 'farhan', '202cb962ac59075b964b07152d234b70'),
-(19, '05', 'Usman Putra', '', '', 'Perempuan', '5', '2022-10-15', 'img_avatar34.png', 2, 'usman', '202cb962ac59075b964b07152d234b70'),
-(20, '06', 'qwe', '', '', 'Laki-laki', '4', '2022-10-18', 'img_avatar111.png', 2, 'qwe', '202cb962ac59075b964b07152d234b70');
+(17, '08182828', 'Tes', 'tes', '08283882', 'Laki-laki', '1', '2022-10-22', 'dummy-user.png', 1, 'tes', '25d55ad283aa400af464c76d713c07ad'),
+(18, '12313123', 'asdsad', 'asdadsadas', '12313123213', 'Laki-laki', '4', '2022-10-22', 'dummy-user1.png', 2, 'asdasd', 'ec02c59dee6faaca3189bace969c22d3');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `data_angsuran`
+-- Struktur dari tabel `data_angsuran`
 --
 
 CREATE TABLE `data_angsuran` (
@@ -91,17 +101,16 @@ CREATE TABLE `data_angsuran` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `data_angsuran`
+-- Dumping data untuk tabel `data_angsuran`
 --
 
 INSERT INTO `data_angsuran` (`id`, `id_pinjaman`, `no_angsuran`, `jumlah_angsuran`, `tanggal_bayar`) VALUES
-(6, 8, '1', 5000, '2022-10-15'),
-(7, 8, '2', 5000, '2022-10-16');
+(3, 5, '132131222', 3000000, '2022-10-14');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `data_jabatan`
+-- Struktur dari tabel `data_jabatan`
 --
 
 CREATE TABLE `data_jabatan` (
@@ -111,7 +120,7 @@ CREATE TABLE `data_jabatan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `data_jabatan`
+-- Dumping data untuk tabel `data_jabatan`
 --
 
 INSERT INTO `data_jabatan` (`id_jabatan`, `nama_jabatan`, `is_pengurus`) VALUES
@@ -124,7 +133,7 @@ INSERT INTO `data_jabatan` (`id_jabatan`, `nama_jabatan`, `is_pengurus`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `data_pinjaman`
+-- Struktur dari tabel `data_pinjaman`
 --
 
 CREATE TABLE `data_pinjaman` (
@@ -138,31 +147,31 @@ CREATE TABLE `data_pinjaman` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `data_pinjaman`
+-- Dumping data untuk tabel `data_pinjaman`
 --
 
 INSERT INTO `data_pinjaman` (`id`, `id_anggota`, `no_pinjaman`, `jumlah_pinjaman`, `tanggal_pinjaman`, `lama`, `status`) VALUES
-(8, 1, '1', 10000, '2022-10-14', 2, 'belum lunas'),
-(9, 3, '2', 15000, '2022-10-14', 3, 'belum lunas');
+(4, 1, '123456789', 2000000, '2022-10-13', 12, 'belum lunas'),
+(5, 4, '3213123123', 2000000, '2022-10-14', 12, 'belum lunas');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `data_simpanan`
+-- Struktur dari tabel `simpanan_tabungan`
 --
 
-CREATE TABLE `data_simpanan` (
-  `id_simpanan` int(11) NOT NULL,
-  `jenis_simpanan` enum('sp','ss','sw') NOT NULL,
+CREATE TABLE `simpanan_tabungan` (
+  `id_simpanan_tabungan` int(11) NOT NULL,
   `id_anggota` int(11) NOT NULL,
   `tanggal` date NOT NULL,
-  `jumlah` int(11) NOT NULL
+  `jumlah` int(11) NOT NULL,
+  `jenis_simpanan` enum('pemasukan','pengeluaran') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `simpanan_wajib`
+-- Struktur dari tabel `simpanan_wajib`
 --
 
 CREATE TABLE `simpanan_wajib` (
@@ -174,104 +183,106 @@ CREATE TABLE `simpanan_wajib` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `simpanan_wajib`
+-- Dumping data untuk tabel `simpanan_wajib`
 --
 
 INSERT INTO `simpanan_wajib` (`id_simpanan_wajib`, `id_anggota`, `tanggal`, `jumlah`, `status`) VALUES
-(2, 1, '2022-10-14', 10000, 1),
-(3, 1, '2022-10-14', 12000, 1);
+(1, 1, '2022-10-10', 20000, 1),
+(2, 0, '2022-10-29', 0, 1),
+(3, 0, '2022-10-29', 180000, 1),
+(4, 1, '2022-10-29', 180000, 1);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `biaya_administrasi`
+-- Indeks untuk tabel `biaya_administrasi`
 --
 ALTER TABLE `biaya_administrasi`
   ADD PRIMARY KEY (`id_biaya_administrasi`);
 
 --
--- Indexes for table `data_anggota`
+-- Indeks untuk tabel `data_anggota`
 --
 ALTER TABLE `data_anggota`
   ADD PRIMARY KEY (`id_anggota`);
 
 --
--- Indexes for table `data_angsuran`
+-- Indeks untuk tabel `data_angsuran`
 --
 ALTER TABLE `data_angsuran`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `data_jabatan`
+-- Indeks untuk tabel `data_jabatan`
 --
 ALTER TABLE `data_jabatan`
   ADD PRIMARY KEY (`id_jabatan`);
 
 --
--- Indexes for table `data_pinjaman`
+-- Indeks untuk tabel `data_pinjaman`
 --
 ALTER TABLE `data_pinjaman`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `data_simpanan`
+-- Indeks untuk tabel `simpanan_tabungan`
 --
-ALTER TABLE `data_simpanan`
-  ADD PRIMARY KEY (`id_simpanan`);
+ALTER TABLE `simpanan_tabungan`
+  ADD PRIMARY KEY (`id_simpanan_tabungan`);
 
 --
--- Indexes for table `simpanan_wajib`
+-- Indeks untuk tabel `simpanan_wajib`
 --
 ALTER TABLE `simpanan_wajib`
   ADD PRIMARY KEY (`id_simpanan_wajib`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `biaya_administrasi`
+-- AUTO_INCREMENT untuk tabel `biaya_administrasi`
 --
 ALTER TABLE `biaya_administrasi`
-  MODIFY `id_biaya_administrasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_biaya_administrasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `data_anggota`
+-- AUTO_INCREMENT untuk tabel `data_anggota`
 --
 ALTER TABLE `data_anggota`
-  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `data_angsuran`
+-- AUTO_INCREMENT untuk tabel `data_angsuran`
 --
 ALTER TABLE `data_angsuran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `data_jabatan`
+-- AUTO_INCREMENT untuk tabel `data_jabatan`
 --
 ALTER TABLE `data_jabatan`
   MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `data_pinjaman`
+-- AUTO_INCREMENT untuk tabel `data_pinjaman`
 --
 ALTER TABLE `data_pinjaman`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `data_simpanan`
+-- AUTO_INCREMENT untuk tabel `simpanan_tabungan`
 --
-ALTER TABLE `data_simpanan`
-  MODIFY `id_simpanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+ALTER TABLE `simpanan_tabungan`
+  MODIFY `id_simpanan_tabungan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `simpanan_wajib`
+-- AUTO_INCREMENT untuk tabel `simpanan_wajib`
 --
 ALTER TABLE `simpanan_wajib`
-  MODIFY `id_simpanan_wajib` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_simpanan_wajib` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

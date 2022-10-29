@@ -11,8 +11,7 @@
             <th class="text-centre">No</th>
             <th class="text-centre">No. Anggota</th>
             <th class="text-centre">Nama Anggota</th>
-            <th class="text-centre">Piutang</th>
-            <th class="text-centre">Status Lunas</th>
+            <th class="text-centre">Total Tabungan</th>
             <th class="text-centre">Action</th>
         </thead>
         
@@ -24,13 +23,13 @@
                     <td><?php echo $no++ ?></td>
                     <td><?php echo $a->nik ?></td>
                     <td><?php echo $a->nama_anggota ?></td>
-                    <td>belum</td>
-                    <td>belum</td>
+                    <td><?php echo "Rp " . number_format($a->total,0,',','.'); ?></td>
                     <td>
                         <center>
-                            <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/simpananSukarela/tambahSimpananSukarela/'. $jenis_simpanan .'/'. $a->id_anggota) ?>"><i class="fas fa-plus"></i> Simpanan Tabungan</a>
+                            <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/simpananSukarela/tambahSimpananSukarela/'. $a->id_anggota) ?>"><i class="fas fa-plus"></i> Tabungan</a>
+                            <a class="btn btn-sm btn-danger" href="<?php echo base_url('admin/simpananSukarela/tambahSimpananSukarela/'. $a->id_anggota) ?>"><i class="fas fa-minus"></i> Tabungan</a>
     
-                            <a class="btn btn-sm btn-success" href="<?php echo base_url('admin/simpananSukarela/detailSimpananSukarela/'. $jenis_simpanan .'/'. $a->id_anggota) ?>">Detail Simpanan Tabungan</a>
+                            <a class="btn btn-sm btn-success" href="<?php echo base_url('admin/simpananSukarela/detailSimpananSukarela/'. $a->id_anggota) ?>">Detail Simpanan Tabungan</a>
                         </center>
                     </td>
     
