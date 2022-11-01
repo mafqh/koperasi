@@ -48,7 +48,7 @@
                                     <?php if($a->hak_akses=='1') { ?>
                                         <td>Admin</td>
                                     <?php }else{ ?>
-                                        <td>Anggota</td>
+                                        <td>Anggota / User</td>
                                     <?php } ?>
                                 
                                 <td>
