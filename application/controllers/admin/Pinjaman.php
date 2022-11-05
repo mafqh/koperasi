@@ -112,14 +112,12 @@ class Pinjaman extends CI_Controller{
             $jumlah_pinjaman    = $this->input->post('jumlah_pinjaman');
             $tanggal_pinjaman   = $this->input->post('tanggal_pinjaman');
             $lama               = $this->input->post('lama');
-            $status             = $this->input->post('status');
 
             $data = array(
                 'no_pinjaman'       => $no_pinjaman,
                 'jumlah_pinjaman'   => $jumlah_pinjaman,
                 'tanggal_pinjaman'  => $tanggal_pinjaman,
-                'lama'              => $lama,
-                'status'            => $status
+                'lama'              => $lama
             );
 
             $this->koperasiModel->update_data('data_pinjaman', $data, ['id' => $id]);
@@ -196,14 +194,24 @@ class Pinjaman extends CI_Controller{
             $jumlah_angsuran    = $this->input->post('jumlah_angsuran');
             $tanggal_bayar      = $this->input->post('tanggal_bayar');
 
+            
             $data = array(
                 'id_pinjaman'       => $id_pinjaman,
                 'no_angsuran'       => $no_angsuran,
                 'jumlah_angsuran'   => $jumlah_angsuran,
                 'tanggal_bayar'  => $tanggal_bayar,
             );
-
             $this->koperasiModel->insert_data($data, 'data_angsuran');
+            // check apakah angsuran sudah lunas
+            $total_angsuran = $this->koperasiModel->get_data_count('data_angsuran', 'jumlah_angsuran', ['id_pinjaman' => $id_pinjaman])->row()->total;
+            $total_pinjaman = $this->koperasiModel->get_data_where('data_pinjaman', 'id', $id_pinjaman)->row();
+            if($total_angsuran >= $total_pinjaman->jumlah_pinjaman){
+                $this->koperasiModel->update_data('data_pinjaman', ['status' => 'lunas'], ['id' => $id_pinjaman]);
+            }else{
+                $this->koperasiModel->update_data('data_pinjaman', ['status' => 'belum lunas'], ['id' => $id_pinjaman]);
+            }
+            
+            
             $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Data berhasil ditambahkan!</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -251,6 +259,16 @@ class Pinjaman extends CI_Controller{
             );
 
             $this->koperasiModel->update_data('data_angsuran', $data, ['id' => $id_angsuran]);
+
+            // check apakah angsuran sudah lunas
+            $total_angsuran = $this->koperasiModel->get_data_count('data_angsuran', 'jumlah_angsuran', ['id_pinjaman' => $id_pinjaman])->row()->total;
+            $total_pinjaman = $this->koperasiModel->get_data_where('data_pinjaman', 'id', $id_pinjaman)->row();
+            if($total_angsuran >= $total_pinjaman->jumlah_pinjaman){
+                $this->koperasiModel->update_data('data_pinjaman', ['status' => 'lunas'], ['id' => $id_pinjaman]);
+            }else{
+                $this->koperasiModel->update_data('data_pinjaman', ['status' => 'belum lunas'], ['id' => $id_pinjaman]);
+            }
+
             $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Data berhasil ditambahkan!</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
