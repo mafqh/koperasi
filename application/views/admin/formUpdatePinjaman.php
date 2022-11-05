@@ -42,16 +42,6 @@
                     <input type="number" name="lama" class="form-control" value="<?php echo $pinjaman->lama; ?>">
                     <?php echo form_error('lama', '<div class="text-small text-danger"> </div>') ?>
                 </div>
-
-                <div class="form-group">
-                    <label>Status</label>
-                    <select class="form-control" name="status" id="">
-                        <option <?php if($pinjaman->status == "belum lunas"){ echo "selected"; } ?> value="belum lunas">Belum Lunas</option>
-                        <option <?php if($pinjaman->status == "lunas"){ echo "selected"; } ?> value="lunas">Lunas</option>
-                    </select>
-                    <?php echo form_error('lama', '<div class="text-small text-danger"> </div>') ?>
-                </div>
-
                 <button type="submit" class="btn btn-primary">Simpan</button>
             
             </form>
