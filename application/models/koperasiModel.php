@@ -131,10 +131,19 @@ class KoperasiModel extends CI_model{
 
     public function get_data_simpanan_tabungan()
     {
-        $this->db->select('data_anggota.*, SUM(simpanan_tabungan.jumlah) as total');
+        $this->db->select('data_anggota.*, SUM(pemasukan.jumlah) as total_pemasukan, SUM(pengeluaran.jumlah) as total_pengeluaran');
         $this->db->from('data_anggota');
-        $this->db->join('simpanan_tabungan','simpanan_tabungan.id_anggota = data_anggota.id_anggota', 'LEFT');
+        $this->db->join('simpanan_tabungan pemasukan','pemasukan.id_anggota = data_anggota.id_anggota AND pemasukan.jenis_simpanan = "pemasukan"', 'LEFT');
+        $this->db->join('simpanan_tabungan pengeluaran','pengeluaran.id_anggota = data_anggota.id_anggota AND pengeluaran.jenis_simpanan = "pengeluaran"', 'LEFT');
         $this->db->group_by('data_anggota.id_anggota');
+        return $this->db->get();
+    }
+
+    public function get_data_tabungan_by_anggota($anggota){
+        $this->db->select('*');
+        $this->db->from('simpanan_tabungan');
+        $this->db->join('data_anggota','simpanan_tabungan.id_anggota = data_anggota.id_anggota', 'INNER');
+        $this->db->where('simpanan_tabungan.id_anggota', $anggota);
         return $this->db->get();
     }
 }

@@ -19,15 +19,16 @@
             <?php $no=1;
             $jenis_simpanan = $this->uri->segment(4);
             foreach($jenis as $a) : ?>
+                <?php $total = $a->total_pemasukan - $a->total_pengeluaran; ?>
                 <tr>
                     <td><?php echo $no++ ?></td>
                     <td><?php echo $a->nik ?></td>
                     <td><?php echo $a->nama_anggota ?></td>
-                    <td><?php echo "Rp " . number_format($a->total,0,',','.'); ?></td>
+                    <td><?php echo "Rp " . number_format($total,0,',','.'); ?></td>
                     <td>
                         <center>
                             <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/simpananSukarela/tambahSimpananSukarela/'. $a->id_anggota) ?>"><i class="fas fa-plus"></i> Tabungan</a>
-                            <a class="btn btn-sm btn-danger" href="<?php echo base_url('admin/simpananSukarela/tambahSimpananSukarela/'. $a->id_anggota) ?>"><i class="fas fa-minus"></i> Tabungan</a>
+                            <a class="btn btn-sm btn-danger" href="<?php echo base_url('admin/simpananSukarela/ambilSimpananSukarela/'. $a->id_anggota) ?>"><i class="fas fa-minus"></i> Tabungan</a>
     
                             <a class="btn btn-sm btn-success" href="<?php echo base_url('admin/simpananSukarela/detailSimpananSukarela/'. $a->id_anggota) ?>">Detail Simpanan Tabungan</a>
                         </center>
