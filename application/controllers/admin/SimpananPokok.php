@@ -18,7 +18,7 @@ class SimpananPokok extends CI_Controller{
 
     public function simpanan()
     {
-        $data['title'] = "Biaya Administrasi";
+        $data['title'] = "Simpanan Pokok";
         $data['jenis'] = $this->koperasiModel->get_data_biaya_administrasi()->result();
         $this->load->view('templates_admin/header', $data);
         $this->load->view('templates_admin/sidebar');
@@ -28,7 +28,7 @@ class SimpananPokok extends CI_Controller{
 
     public function tambahSimpananPokok()
     {
-        $data['title'] = "Tambah Biaya Administrasi";
+        $data['title'] = "Tambah Simpanan Pokok";
         $this->load->view('templates_admin/header', $data);
         $this->load->view('templates_admin/sidebar');
         $this->load->view('admin/formTambahSimpananPokok', $data);
