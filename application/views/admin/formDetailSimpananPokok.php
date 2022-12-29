@@ -5,7 +5,7 @@
         <h1 class="h3 mb-0 text-gray-800"><?php echo $title ?></h1>
     </div>
 <?php $nominal = 20000; ?>
-    <div class="alert alert-success font-weight-bold mb-4" style="width: 65%">Jumlah Biaya Administrasi yang harus dibayar <?= "Rp " . number_format($nominal,0,',','.'); ?></div>
+    <div class="alert alert-success font-weight-bold mb-4" style="width: 65%">Jumlah Simpanan Pokok yang harus dibayar <?= "Rp " . number_format($nominal,0,',','.'); ?></div>
 
 <table class="table table-striped table-bordered">
 <thead>

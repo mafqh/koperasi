@@ -17,7 +17,7 @@ class SimpananPokok extends CI_Controller{
     }
 
     public function index(){
-        $data['title'] = "Biaya Administrasi";
+        $data['title'] = "Simpanan Pokok";
         $data['anggota'] = $this->db->get_where('data_anggota',['id_anggota'=>$this->session->userdata('id_anggota')])->row();
         $data['simpanan_pokok'] = $this->db->get_where('biaya_administrasi',['id_anggota'=>$this->session->userdata('id_anggota')])->result();
         $this->load->view('templates_anggota/header', $data);
@@ -28,7 +28,7 @@ class SimpananPokok extends CI_Controller{
 
     public function tambahSimpananPokok()
     {
-        $data['title'] = "Tambah Biaya Administrasi";
+        $data['title'] = "Tambah Simpanan Pokok";
         $this->load->view('templates_anggota/header', $data);
         $this->load->view('templates_anggota/sidebar');
         $this->load->view('anggota/formTambahSimpananPokok', $data);
