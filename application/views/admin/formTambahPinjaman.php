@@ -20,12 +20,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Nomor Pinjaman</label>
-                    <input type="text" name="no_pinjaman" class="form-control">
-                    <?php echo form_error('no_pinjaman', '<div class="text-small text-danger"> </div>') ?>
-                </div>
-
-                <div class="form-group">
                     <label>Jumlah Pinjaman</label>
                     <input type="number" name="jumlah_pinjaman" class="form-control">
                     <?php echo form_error('jumlah_pinjaman', '<div class="text-small text-danger"> </div>') ?>

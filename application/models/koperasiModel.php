@@ -131,12 +131,19 @@ class KoperasiModel extends CI_model{
 
     public function get_data_simpanan_tabungan()
     {
-        $this->db->select('data_anggota.*, SUM(pemasukan.jumlah) as total_pemasukan, SUM(pengeluaran.jumlah) as total_pengeluaran');
+        $this->db->select('data_anggota.*');
         $this->db->from('data_anggota');
-        $this->db->join('simpanan_tabungan pemasukan','pemasukan.id_anggota = data_anggota.id_anggota AND pemasukan.jenis_simpanan = "pemasukan"', 'LEFT');
-        $this->db->join('simpanan_tabungan pengeluaran','pengeluaran.id_anggota = data_anggota.id_anggota AND pengeluaran.jenis_simpanan = "pengeluaran"', 'LEFT');
         $this->db->group_by('data_anggota.id_anggota');
         return $this->db->get();
+    }
+
+    public function get_total_simpanan_tabungan($anggota, $jenis)
+    {
+        $this->db->select('SUM(simpanan_tabungan.jumlah) as total');
+        $this->db->from('simpanan_tabungan');
+        $this->db->where('simpanan_tabungan.id_anggota', $anggota);
+        $this->db->where('simpanan_tabungan.jenis_simpanan', $jenis);
+        return $this->db->get()->row()->total;
     }
 
     public function get_data_tabungan_by_anggota($anggota){
@@ -145,6 +152,14 @@ class KoperasiModel extends CI_model{
         $this->db->join('data_anggota','simpanan_tabungan.id_anggota = data_anggota.id_anggota', 'INNER');
         $this->db->where('simpanan_tabungan.id_anggota', $anggota);
         return $this->db->get();
+    }
+
+    public function get_total_data_pinjaman($anggota)
+    {
+        $this->db->select('COUNT(data_pinjaman.id) as total');
+        $this->db->from('data_pinjaman');
+        $this->db->where('data_pinjaman.id_anggota', $anggota);
+        return $this->db->get()->row()->total;
     }
 }
 

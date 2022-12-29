@@ -49,7 +49,6 @@ class Pinjaman extends CI_Controller{
     public function tambahDataAksi()
     {
         $this->form_validation->set_rules('id_anggota', 'Anggota', 'required');
-        $this->form_validation->set_rules('no_pinjaman', 'Nomor Pinjaman', 'required');
         $this->form_validation->set_rules('jumlah_pinjaman', 'Jumlah Pinjaman', 'required');
         $this->form_validation->set_rules('tanggal_pinjaman', 'Tanggal Pinjaman', 'required');
         $this->form_validation->set_rules('lama', 'Lama Pinjaman', 'required');
@@ -58,10 +57,17 @@ class Pinjaman extends CI_Controller{
             $this->tambahData();
         }else{
             $id_anggota         = $this->input->post('id_anggota');
-            $no_pinjaman        = $this->input->post('no_pinjaman');
             $jumlah_pinjaman    = $this->input->post('jumlah_pinjaman');
             $tanggal_pinjaman   = $this->input->post('tanggal_pinjaman');
             $lama               = $this->input->post('lama');
+
+            $last_number = $this->koperasiModel->get_total_data_pinjaman($id_anggota); 
+            if($last_number){
+                $last_number = str_pad($last_number+1, 3, '0', STR_PAD_LEFT);
+            }else{
+                $last_number = '001';
+            }
+            $no_pinjaman = 'P'.date('ymd').$id_anggota.$last_number;
 
             $data = array(
                 'id_anggota'        => $id_anggota,
@@ -98,7 +104,6 @@ class Pinjaman extends CI_Controller{
     public function updateDataAksi()
     {
         $this->form_validation->set_rules('id', 'Anggota', 'required');
-        $this->form_validation->set_rules('no_pinjaman', 'Nomor Pinjaman', 'required');
         $this->form_validation->set_rules('jumlah_pinjaman', 'Jumlah Pinjaman', 'required');
         $this->form_validation->set_rules('tanggal_pinjaman', 'Tanggal Pinjaman', 'required');
         $this->form_validation->set_rules('lama', 'Lama Pinjaman', 'required');
@@ -108,13 +113,11 @@ class Pinjaman extends CI_Controller{
             $this->updateData($id);
         }else{
             $id                 = $this->input->post('id');
-            $no_pinjaman        = $this->input->post('no_pinjaman');
             $jumlah_pinjaman    = $this->input->post('jumlah_pinjaman');
             $tanggal_pinjaman   = $this->input->post('tanggal_pinjaman');
             $lama               = $this->input->post('lama');
 
             $data = array(
-                'no_pinjaman'       => $no_pinjaman,
                 'jumlah_pinjaman'   => $jumlah_pinjaman,
                 'tanggal_pinjaman'  => $tanggal_pinjaman,
                 'lama'              => $lama

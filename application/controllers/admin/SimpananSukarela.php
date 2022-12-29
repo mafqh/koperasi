@@ -20,7 +20,15 @@ class SimpananSukarela extends CI_Controller{
     {
 
         $data['title'] = "Simpanan Tabungan";
-        $data['jenis'] = $this->koperasiModel->get_data_simpanan_tabungan()->result();
+        $data_anggota = $this->koperasiModel->get_data_simpanan_tabungan()->result();
+        if(!empty($data_anggota)){
+            foreach ($data_anggota as $key => $value) {
+                $total_pemasukan   = $this->koperasiModel->get_total_simpanan_tabungan($value->id_anggota, "pemasukan");
+                $total_pengeluaran = $this->koperasiModel->get_total_simpanan_tabungan($value->id_anggota, "pengeluaran");
+                $data_anggota[$key]->total = $total_pemasukan-$total_pengeluaran;
+            }
+        }
+        $data['jenis'] = $data_anggota;
         $this->load->view('templates_admin/header', $data);
         $this->load->view('templates_admin/sidebar');
         $this->load->view('admin/simpananSukarela', $data);

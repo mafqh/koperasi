@@ -1,26 +1,21 @@
 <body id="page-top">
-
     <!-- Page Wrapper -->
     <div id="wrapper">
-
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-text mx-3">KOPERASI BGR</div>
             </a>
-
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
-
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo base_url('admin/dashboard') ?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Dashboard</span>
+                </a>
             </li>
-
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
@@ -57,21 +52,24 @@
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo base_url('admin/pinjaman') ?>">
                     <i class="fas fa-fw fa-money-check-alt"></i>
-                    <span>Pinjaman</span></a>
+                    <span>Pinjaman</span>
+                </a>
             </li>
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo base_url('admin/gantiPassword') ?>">
                     <i class="fas fa-fw fa-lock"></i>
-                    <span>Ubah Password</span></a>
+                    <span>Ubah Password</span>
+                </a>
             </li>
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url('welcome/logout') ?>">
+                <a class="nav-link" onclick="return confirm('Yakin Untuk Logout?')" href="<?php echo base_url('welcome/logout') ?>">
                     <i class="fas fa-fw fa-sign-out-alt"></i>
-                    <span>Logout</span></a>
+                    <span>Logout</span>
+                </a>
             </li>
 
             <!-- Divider -->

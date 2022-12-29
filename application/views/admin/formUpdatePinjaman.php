@@ -21,7 +21,7 @@
 
                 <div class="form-group">
                     <label>Nomor Pinjaman</label>
-                    <input type="text" name="no_pinjaman" class="form-control" value="<?php echo $pinjaman->no_pinjaman; ?>" >
+                    <input type="text" name="no_pinjaman" class="form-control" value="<?php echo $pinjaman->no_pinjaman; ?>" readonly>
                     <?php echo form_error('no_pinjaman', '<div class="text-small text-danger"> </div>') ?>
                 </div>
 
