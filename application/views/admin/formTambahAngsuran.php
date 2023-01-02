@@ -20,12 +20,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Nomor Angsuran</label>
-                    <input type="text" name="no_angsuran" class="form-control">
-                    <?php echo form_error('no_angsuran', '<div class="text-small text-danger"> </div>') ?>
-                </div>
-
-                <div class="form-group">
                     <label>Jumlah Angsuran</label>
                     <input type="number" name="jumlah_angsuran" class="form-control">
                     <?php echo form_error('jumlah_angsuran', '<div class="text-small text-danger"> </div>') ?>

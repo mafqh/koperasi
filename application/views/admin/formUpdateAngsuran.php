@@ -22,7 +22,7 @@
 
                 <div class="form-group">
                     <label>Nomor Angsuran</label>
-                    <input type="text" name="no_angsuran" class="form-control" value="<?php echo $angsuran->no_angsuran; ?>">
+                    <input type="text" name="no_angsuran" class="form-control" value="<?php echo $angsuran->no_angsuran; ?>" readonly>
                     <?php echo form_error('no_angsuran', '<div class="text-small text-danger"> </div>') ?>
                 </div>
 

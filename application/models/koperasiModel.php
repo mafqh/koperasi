@@ -175,6 +175,14 @@ class KoperasiModel extends CI_model{
         $this->db->where('data_pinjaman.id_anggota', $anggota);
         return $this->db->get()->row()->total;
     }
+
+    public function get_total_data_angsuran($pinjaman)
+    {
+        $this->db->select('COUNT(data_angsuran.id) as total');
+        $this->db->from('data_angsuran');
+        $this->db->where('data_angsuran.id_pinjaman', $pinjaman);
+        return $this->db->get()->row()->total;
+    }
 }
 
 ?>

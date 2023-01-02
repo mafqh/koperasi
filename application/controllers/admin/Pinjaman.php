@@ -219,7 +219,6 @@ class Pinjaman extends CI_Controller{
     {
         if($this->session->userdata('hak_akses') == 1){
             $this->form_validation->set_rules('id_pinjaman', 'Pinjaman ID', 'required');
-            $this->form_validation->set_rules('no_angsuran', 'Nomor Angsuran', 'required');
             $this->form_validation->set_rules('jumlah_angsuran', 'Jumlah Angsuran', 'required');
             $this->form_validation->set_rules('tanggal_bayar', 'Tanggal Angsuran', 'required');
     
@@ -227,11 +226,17 @@ class Pinjaman extends CI_Controller{
                 $this->tambahData();
             }else{
                 $id_pinjaman        = $this->input->post('id_pinjaman');
-                $no_angsuran        = $this->input->post('no_angsuran');
                 $jumlah_angsuran    = $this->input->post('jumlah_angsuran');
                 $tanggal_bayar      = $this->input->post('tanggal_bayar');
+
+                $last_number = $this->koperasiModel->get_total_data_angsuran($id_pinjaman); 
+                if($last_number){
+                    $last_number = str_pad($last_number+1, 3, '0', STR_PAD_LEFT);
+                }else{
+                    $last_number = '001';
+                }
+                $no_angsuran = 'A'.date('ymd').$id_pinjaman.$last_number;
     
-                
                 $data = array(
                     'id_pinjaman'       => $id_pinjaman,
                     'no_angsuran'       => $no_angsuran,
@@ -284,7 +289,6 @@ class Pinjaman extends CI_Controller{
     {
         if($this->session->userdata('hak_akses') == 1){
             $this->form_validation->set_rules('id_angsuran', 'Angsuran Id', 'required');
-            $this->form_validation->set_rules('no_angsuran', 'Nomor Angsuran', 'required');
             $this->form_validation->set_rules('jumlah_angsuran', 'Jumlah Angsuran', 'required');
             $this->form_validation->set_rules('tanggal_bayar', 'Tanggal Angsuran', 'required');
     
@@ -293,12 +297,10 @@ class Pinjaman extends CI_Controller{
             }else{
                 $id_pinjaman        = $this->input->post('id_pinjaman');
                 $id_angsuran        = $this->input->post('id_angsuran');
-                $no_angsuran        = $this->input->post('no_angsuran');
                 $jumlah_angsuran    = $this->input->post('jumlah_angsuran');
                 $tanggal_bayar      = $this->input->post('tanggal_bayar');
     
                 $data = array(
-                    'no_angsuran'       => $no_angsuran,
                     'jumlah_angsuran'   => $jumlah_angsuran,
                     'tanggal_bayar'     => $tanggal_bayar,
                 );
