@@ -16,7 +16,9 @@
         <th>Jenis Kelamin</th>
         <th>Jumlah</th>
         <th>Tanggal Bayar</th>
+        <?php if($this->session->userdata('hak_akses') == 1){ ?>
         <th>Aksi</th>
+        <?php } ?>
     </tr>
 </thead>
 <tbody>
@@ -34,6 +36,7 @@
         <td><?= $data->jenis_kelamin ?></td>
         <td><?= "Rp " . number_format($data->jumlah,0,',','.'); ?></td>
         <td><?= date('d - M - Y', strtotime($data->tanggal)) ?></td>
+        <?php if($this->session->userdata('hak_akses') == 1){ ?>
         <td>
             <center>
                 <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/simpananWajib/editSimpananWajib/'.$data->id_simpanan_wajib) ?>"><i class="fas fa-edit"></i> Edit</a>
@@ -41,18 +44,26 @@
                 <a class="btn btn-sm btn-danger" onclick="return confirm('yakin menghapus data ?')" href="<?php echo base_url('admin/simpananWajib/deleteData/'.$data->id_simpanan_wajib.'/'.$data->id_anggota) ?>">Hapus</a>
             </center>
         </td>
+        <?php } ?>
 
     </tr>
 
     <?php $total = $total+$data->jumlah;?>
     <?php } ?>
     <?php $sisa = $nominal-$total ?>
+
+    <?php
+        $total_row = 5; 
+        if($this->session->userdata('hak_akses') == 1){ 
+            $total_row = 6; 
+        }
+    ?>
     <tr>
-        <th colspan="6">Total</th>
+        <th colspan="<?php echo $total_row; ?>">Total</th>
         <th><?= "Rp " . number_format($total,0,',','.'); ?></th>
     </tr>
     <tr>
-        <th colspan="6">Sisa bayar</th>
+        <th colspan="<?php echo $total_row; ?>">Sisa bayar</th>
         <th><?= "Rp ". number_format($sisa,0,',','.') ?></th>
     </tr>
 </tbody>

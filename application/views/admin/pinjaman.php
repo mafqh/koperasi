@@ -8,7 +8,9 @@
             <div class="card">  
                 <div class="card-body">
                     <?php echo $this->session->flashdata('pesan') ?>
-                    <a class="mb-2 mt-2 btn btn-sm btn-success" href="<?php echo base_url('admin/pinjaman/listAnggota') ?>"><i class="fas fa-plus"></i> Tambah Pinjaman</a>
+                    <?php if($this->session->userdata('hak_akses') == 1){ ?>
+                        <a class="mb-2 mt-2 btn btn-sm btn-success" href="<?php echo base_url('admin/pinjaman/listAnggota') ?>"><i class="fas fa-plus"></i> Tambah Pinjaman</a>
+                    <?php } ?>
                     <table class="table table-striped table-bordered" id="myTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
@@ -39,8 +41,10 @@
                                 <?php } ?>
                                 <td>
                                     <center>
-                                        <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/pinjaman/updateData/'. $a->id) ?>"><i class="fas fa-edit"></i></a>
-                                        <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger" href="<?php echo base_url('admin/pinjaman/deleteData/'. $a->id) ?>"><i class="fas fa-trash"></i></a>
+                                        <?php if($this->session->userdata('hak_akses') == 1){ ?>
+                                            <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/pinjaman/updateData/'. $a->id) ?>"><i class="fas fa-edit"></i></a>
+                                            <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger" href="<?php echo base_url('admin/pinjaman/deleteData/'. $a->id) ?>"><i class="fas fa-trash"></i></a>
+                                        <?php } ?>
                                         <a class="btn btn-sm btn-success" href="<?php echo base_url('admin/pinjaman/detailAngsuran/'. $a->id) ?>">Detail Angsuran</a>
                                     </center>
                                 </td>

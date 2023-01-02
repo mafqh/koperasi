@@ -29,7 +29,9 @@
                                 <th>No Angsuran</th>
                                 <th>Jumlah Angsuran</th>
                                 <th>Tanggal Bayar</th>
+                                <?php if($this->session->userdata('hak_akses') == 1){ ?>
                                 <th>Action</th>
+                                <?php } ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,12 +42,14 @@
                                 <td><?php echo $a->no_angsuran; ?></td>
                                 <td><?php echo number_format($a->jumlah_angsuran,0,',','.'); ?></td>
                                 <td><?php echo date("d-m-Y", strtotime($a->tanggal_bayar)); ?></td>
+                                <?php if($this->session->userdata('hak_akses') == 1){ ?>
                                 <td>
                                     <center>
                                         <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/pinjaman/updateAngsuran/'. $a->id) ?>"><i class="fas fa-edit"></i></a>
                                         <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger" href="<?php echo base_url('admin/pinjaman/deleteDataAngsuran/'. $a->id) ?>"><i class="fas fa-trash"></i></a>
                                     </center>
                                 </td>
+                                <?php } ?>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>

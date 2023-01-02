@@ -1,3 +1,9 @@
+<?php 
+if($this->session->userdata('hak_akses')){
+    redirect('admin/dashboard');
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,7 +47,7 @@
                                         <h1 class="h4 text-gray-900 mb-4">SISTEM INFORMASI <br> <b>KOPERASI BOGOR GADING RESIDENCE</b></h1>
                                     </div>
                                     <?php echo $this->session->flashdata('pesan') ?>
-                                    <form class="user" method="POST" action="<?php echo base_url('welcome') ?>">
+                                    <form class="user" method="POST" action="<?php echo base_url('login') ?>">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"

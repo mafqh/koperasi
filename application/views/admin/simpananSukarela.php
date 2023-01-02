@@ -26,9 +26,10 @@
                     <td><?php echo "Rp " . number_format($a->total,0,',','.'); ?></td>
                     <td>
                         <center>
+                            <?php if($this->session->userdata('hak_akses') == 1){ ?>
                             <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/simpananSukarela/tambahSimpananSukarela/'. $a->id_anggota) ?>"><i class="fas fa-plus"></i> Tabungan</a>
                             <a class="btn btn-sm btn-danger" href="<?php echo base_url('admin/simpananSukarela/ambilSimpananSukarela/'. $a->id_anggota) ?>"><i class="fas fa-minus"></i> Tabungan</a>
-    
+                            <?php } ?>
                             <a class="btn btn-sm btn-success" href="<?php echo base_url('admin/simpananSukarela/detailSimpananSukarela/'. $a->id_anggota) ?>">Detail Simpanan Tabungan</a>
                         </center>
                     </td>

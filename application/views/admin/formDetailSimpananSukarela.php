@@ -18,7 +18,9 @@
                             <th>Pengeluaran/Pemasukan</th>
                             <th>Jumlah</th>
                             <th>Tanggal</th>
+                            <?php if($this->session->userdata('hak_akses') == 1){ ?>
                             <th>Aksi</th>
+                            <?php } ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,12 +40,14 @@
                             <?php } ?>
                             <td><?= "Rp " . number_format($data->jumlah,0,',','.'); ?></td>
                             <td><?= date('d - M - Y', strtotime($data->tanggal)) ?></td>
+                            <?php if($this->session->userdata('hak_akses') == 1){ ?>
                             <td>
                                 <center>
                                     <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/simpananSukarela/updateData/'. $data->id_simpanan_tabungan) ?>"><i class="fas fa-edit"></i></a>
                                     <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger" href="<?php echo base_url('admin/simpananSukarela/deleteData/'. $data->id_simpanan_tabungan) ?>"><i class="fas fa-trash"></i></a>
                                 </center>
                             </td>
+                            <?php } ?>
                         </tr>
                         <?php } ?>
                     </tbody>

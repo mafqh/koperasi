@@ -39,7 +39,7 @@
                         <td><span class="badge badge-danger px-4 py-2">Belum Lunas</span></td>
                     <?php } ?>
                     <td>
-                        <?php if($status == "belum lunas"){ ?>
+                        <?php if($status == "belum lunas" && $this->session->userdata('hak_akses') == 1){ ?>
                             <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/simpananWajib/tambahSimpananWajib/'. $a->id_anggota) ?>"><i class="fas fa-plus"></i> Simpanan Wajib</a>
                         <?php } ?>
                             

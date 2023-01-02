@@ -12,7 +12,7 @@ class GantiPassword extends CI_Controller{
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>');
-				redirect('welcome');
+				redirect('login');
         }
     }
 
@@ -44,7 +44,7 @@ class GantiPassword extends CI_Controller{
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>');
-            redirect('welcome');
+            redirect('login');
         }else{
             $data['title'] = "Ganti Password";
             $this->load->view('templates_anggota/header', $data);

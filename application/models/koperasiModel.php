@@ -86,18 +86,24 @@ class KoperasiModel extends CI_model{
         return $this->db->get();
     }
 
-    public function get_data_pinjaman(){
+    public function get_data_pinjaman($anggota){
         $this->db->select('data_pinjaman.*, data_anggota.nama_anggota');
         $this->db->from('data_pinjaman');
         $this->db->join('data_anggota','data_pinjaman.id_anggota = data_anggota.id_anggota', 'INNER');
+        if(!empty($anggota)){
+            $this->db->where('data_anggota.id_anggota', $anggota);
+        }
         return $this->db->get();
     }
 
-    public function get_data_biaya_administrasi()
+    public function get_data_biaya_administrasi($anggota)
     {
         $this->db->select('data_anggota.*, SUM(biaya_administrasi.jumlah) as total');
         $this->db->from('data_anggota');
         $this->db->join('biaya_administrasi','biaya_administrasi.id_anggota = data_anggota.id_anggota', 'LEFT');
+        if(!empty($anggota)){
+            $this->db->where('data_anggota.id_anggota', $anggota);
+        }
         $this->db->group_by('data_anggota.id_anggota');
         return $this->db->get();
     }
@@ -106,16 +112,21 @@ class KoperasiModel extends CI_model{
         $this->db->select('*');
         $this->db->from('biaya_administrasi');
         $this->db->join('data_anggota','biaya_administrasi.id_anggota = data_anggota.id_anggota', 'INNER');
-        $this->db->where('biaya_administrasi.id_anggota', $anggota);
+        if(!empty($anggota)){
+            $this->db->where('biaya_administrasi.id_anggota', $anggota);
+        }
         $this->db->where('biaya_administrasi.status',1);
         return $this->db->get();
     }
 
-    public function get_data_simpanan_wajib()
+    public function get_data_simpanan_wajib($anggota)
     {
         $this->db->select('data_anggota.*, SUM(simpanan_wajib.jumlah) as total');
         $this->db->from('data_anggota');
         $this->db->join('simpanan_wajib','simpanan_wajib.id_anggota = data_anggota.id_anggota', 'LEFT');
+        if(!empty($anggota)){
+            $this->db->where('data_anggota.id_anggota', $anggota);
+        }
         $this->db->group_by('data_anggota.id_anggota');
         return $this->db->get();
     }
@@ -129,10 +140,13 @@ class KoperasiModel extends CI_model{
         return $this->db->get();
     }
 
-    public function get_data_simpanan_tabungan()
+    public function get_data_simpanan_tabungan($anggota)
     {
         $this->db->select('data_anggota.*');
         $this->db->from('data_anggota');
+        if(!empty($anggota)){
+            $this->db->where('data_anggota.id_anggota', $anggota);
+        }
         $this->db->group_by('data_anggota.id_anggota');
         return $this->db->get();
     }
