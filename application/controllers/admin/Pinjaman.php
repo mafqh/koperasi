@@ -335,6 +335,16 @@ class Pinjaman extends CI_Controller{
             $angsuran = $this->db->get_where('data_angsuran', ['id' => $id])->row();
             $where = array('id' => $id);
             $this->koperasiModel->delete_data($where, 'data_angsuran');
+
+            // check apakah angsuran sudah lunas
+            $total_angsuran = $this->koperasiModel->get_data_count('data_angsuran', 'jumlah_angsuran', ['id_pinjaman' => $angsuran->id_pinjaman])->row()->total;
+            $total_pinjaman = $this->koperasiModel->get_data_where('data_pinjaman', 'id', $angsuran->id_pinjaman)->row();
+            if($total_angsuran >= $total_pinjaman->jumlah_pinjaman){
+                $this->koperasiModel->update_data('data_pinjaman', ['status' => 'lunas'], ['id' => $angsuran->id_pinjaman]);
+            }else{
+                $this->koperasiModel->update_data('data_pinjaman', ['status' => 'belum lunas'], ['id' => $angsuran->id_pinjaman]);
+            }
+
             $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>Data berhasil dihapus!</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
