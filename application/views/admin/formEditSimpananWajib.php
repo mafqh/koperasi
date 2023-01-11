@@ -20,7 +20,6 @@
             </div>
 
             <button type="submit" class="btn btn-success">Simpan</button>
-            <!-- <a href="<?php echo base_url() ?>Admin/SimpananPokok/detailSimpananWajib/<?php echo $simpanan->id_anggota ?>" class="btn btn-danger">Batal</a> -->
             </form>
         </div>
     </div>

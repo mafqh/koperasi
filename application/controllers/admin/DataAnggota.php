@@ -115,9 +115,6 @@ class DataAnggota extends CI_Controller{
     {
         $this->_rules();
         
-        // if($this->form_validation->run() == FALSE) {
-        //     $this->updateData();
-        // }else{
             $id              = $this->input->post('id_anggota');
             $nik             = $this->input->post('nik');
             $nama_anggota    = $this->input->post('nama_anggota');
@@ -166,7 +163,6 @@ class DataAnggota extends CI_Controller{
             </button>
             </div>');
             redirect('admin/DataAnggota');
-        // }
     }
 
     public function _rules()

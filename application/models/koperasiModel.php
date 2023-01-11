@@ -27,15 +27,6 @@ class KoperasiModel extends CI_model{
         $this->db->delete($table);
     }
 
-    // public function insert_batch($table = null, $data = array())
-    // {
-    //     $jumlah = count($data);
-    //     if($jumlah > 0)
-    //     {
-    //         $this->db->insert_batch($table, $data);
-    //     }
-    // }
-
     public function cek_login()
     {
         $username   = set_value('username');
