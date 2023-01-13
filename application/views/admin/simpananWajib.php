@@ -27,8 +27,8 @@
                     <?php 
                         $status = "lunas";
                         $piutang = 0;
-                        if($a->total < 200000){
-                            $piutang = 200000 - $a->total;
+                        if($a->total < 240000){
+                            $piutang = 240000 - $a->total;
                             $status = "belum lunas";
                         }
                     ?>
@@ -43,7 +43,7 @@
                             <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/simpananWajib/tambahSimpananWajib/'. $a->id_anggota) ?>"><i class="fas fa-plus"></i> Simpanan Wajib</a>
                         <?php } ?>
                             
-                        <?php if($piutang != 20000){ ?>
+                        <?php if($piutang != 24000){ ?>
                             <a class="btn btn-sm btn-success" href="<?php echo base_url('admin/simpananWajib/detailSimpananWajib/'. $a->id_anggota) ?>">Detail Simpanan Wajib</a>
                         <?php } ?>
                     </td>
