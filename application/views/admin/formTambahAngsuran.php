@@ -21,13 +21,13 @@
 
                 <div class="form-group">
                     <label>Jumlah Angsuran</label>
-                    <input type="number" name="jumlah_angsuran" class="form-control">
+                    <input type="number" name="jumlah_angsuran" class="form-control" required>
                     <?php echo form_error('jumlah_angsuran', '<div class="text-small text-danger"> </div>') ?>
                 </div>
 
                 <div class="form-group">
                     <label>Tanggal Bayar</label>
-                    <input type="date" name="tanggal_bayar" class="form-control">
+                    <input type="date" name="tanggal_bayar" class="form-control" required>
                     <?php echo form_error('tanggal_bayar', '<div class="text-small text-danger"> </div>') ?>
                 </div>
 

@@ -21,19 +21,19 @@
 
                 <div class="form-group">
                     <label>Jumlah Pinjaman</label>
-                    <input type="number" name="jumlah_pinjaman" class="form-control">
+                    <input type="number" name="jumlah_pinjaman" class="form-control" required>
                     <?php echo form_error('jumlah_pinjaman', '<div class="text-small text-danger"> </div>') ?>
                 </div>
 
                 <div class="form-group">
                     <label>Tanggal Pinjaman</label>
-                    <input type="date" name="tanggal_pinjaman" class="form-control">
+                    <input type="date" name="tanggal_pinjaman" class="form-control" required>
                     <?php echo form_error('tanggal_pinjaman', '<div class="text-small text-danger"> </div>') ?>
                 </div>
 
                 <div class="form-group">
                     <label>Lama Pinjaman (Bulan)</label>
-                    <input type="number" name="lama" class="form-control">
+                    <input type="number" name="lama" class="form-control" required>
                     <?php echo form_error('lama', '<div class="text-small text-danger"> </div>') ?>
                 </div>
 

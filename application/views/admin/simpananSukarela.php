@@ -1,8 +1,30 @@
 <div class="container-fluid">
-
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800"><?php echo $title ?></h1>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h1 class="h3 mb-0 text-gray-800"><?php echo $title ?></h1>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-1 pt-2"><label>Tahun</label></div>
+                <div class="col-md-5">
+                    </option>
+
+                    <select class="form-control" name="tahun" id="tahun" onchange="changeTahun(this)">
+                        <?php for ($i=2017; $i <= 2050 ; $i++) { ?>
+                            <option value="<?php echo $i ?>" <?php if (date("Y") == $i) {echo "selected";}?>>
+                            <?php echo $i; ?>
+                        <?php }?>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <a href="<?php echo base_url('admin/SimpananSukarela/exportExcel/').date('Y'); ?>" class="btn btn-success shadow-sm" id="btn-export-excel"><i class="fas fa-file-excel fa-sm text-white-50"></i> Export Excel</a>
+                </div>
+                <div class="col-md-3">
+                    <a href="<?php echo base_url('admin/SimpananSukarela/exportPdf/').date('Y'); ?>" class="btn btn-danger shadow-sm" id="btn-export-pdf"><i class="fas fa-file-pdf fa-sm text-white-50"></i> Report Pdf</a>
+                </div>
+            </div>
+        </div>
     </div>
 
         <!-- Begin Page Content -->
@@ -43,6 +65,15 @@
 
 <script>
     $(document).ready( function () {
-    $('#myTable').DataTable();
-} );
+        $('#myTable').DataTable();
+
+    });
+
+    function changeTahun(e) {
+        var tahun = $(e).val();
+        var url_excel = '<?php echo base_url('admin/SimpananSukarela/exportExcel/'); ?>' + tahun;
+        var url_pdf = '<?php echo base_url('admin/SimpananSukarela/exportPdf/'); ?>' + tahun;
+        $("#btn-export-excel").attr("href", url_excel);
+        $("#btn-export-pdf").attr("href", url_pdf);
+    }
 </script>

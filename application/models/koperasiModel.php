@@ -183,6 +183,34 @@ class KoperasiModel extends CI_model{
         $this->db->where('data_angsuran.id_pinjaman', $pinjaman);
         return $this->db->get()->row()->total;
     }
+
+    public function get_tabungan_tahun_lalu($tahun)
+    {
+        $this->db->select('SUM(simpanan_tabungan.jumlah) as total, simpanan_tabungan.id_anggota, simpanan_tabungan.jenis_simpanan');
+        $this->db->from('simpanan_tabungan');
+        $this->db->where('YEAR(simpanan_tabungan.tanggal) <', $tahun);
+        $this->db->group_by(['simpanan_tabungan.id_anggota', 'simpanan_tabungan.jenis_simpanan']);
+        return $this->db->get()->result();
+    }
+
+    public function get_tabungan_tahun_ini($tahun)
+    {
+        $this->db->select('SUM(simpanan_tabungan.jumlah) as total, simpanan_tabungan.id_anggota, simpanan_tabungan.jenis_simpanan');
+        $this->db->from('simpanan_tabungan');
+        $this->db->where('YEAR(simpanan_tabungan.tanggal)', $tahun);
+        $this->db->group_by(['simpanan_tabungan.id_anggota', 'simpanan_tabungan.jenis_simpanan']);
+        return $this->db->get()->result();
+    }
+
+    public function get_tabungan_perbulan($tahun)
+    {
+        $this->db->select('SUM(simpanan_tabungan.jumlah) as total, simpanan_tabungan.id_anggota, 
+                           simpanan_tabungan.jenis_simpanan, MONTH(simpanan_tabungan.tanggal) as bulan');
+        $this->db->from('simpanan_tabungan');
+        $this->db->where('YEAR(simpanan_tabungan.tanggal)', $tahun);
+        $this->db->group_by(['simpanan_tabungan.id_anggota', 'simpanan_tabungan.jenis_simpanan', 'MONTH(simpanan_tabungan.tanggal)']);
+        return $this->db->get()->result();
+    }
 }
 
 ?>
