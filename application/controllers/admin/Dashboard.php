@@ -4,6 +4,7 @@ class Dashboard extends CI_Controller{
 
     public function __construct(){
         parent::__construct();
+        $this->load->model('koperasiModel');
 
         if(!$this->session->userdata('hak_akses')){
             $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -53,6 +54,75 @@ class Dashboard extends CI_Controller{
             $this->load->view('anggota/dashboard', $data);
         }
         $this->load->view('templates_admin/footer');
+    }
+
+    public function dataChartTabungan($tahun)
+    {   
+        //get total simpanan perbulan
+        $data_perbulan = [];
+        $perbulan = $this->koperasiModel->get_tabungan_perbulan($tahun);
+        if(!empty($perbulan)){
+            foreach ($perbulan as $key => $value) {
+                $total = $value->total;
+                if($value->jenis_simpanan == "pengeluaran"){
+                    if(!empty($data_perbulan[$value->bulan]["kredit"])){
+                        $data_perbulan[$value->bulan]["kredit"] += $total;
+                    }else{
+                        $data_perbulan[$value->bulan]["kredit"] = $total;
+                    }
+                }else{
+                    if(!empty($data_perbulan[$value->bulan]["debit"])){
+                        $data_perbulan[$value->bulan]["debit"] += $total;
+                    }else{
+                        $data_perbulan[$value->bulan]["debit"] = $total;
+                    }
+                }
+            }
+        }
+
+
+        $kategori = [
+            "Januari",
+            "Februari",
+            "Maret",
+            "April",
+            "Mei",
+            "Juni",
+            "Juli",
+            "Agustus",
+            "September",
+            "Oktober",
+            "November",
+            "Desember"
+        ];
+        
+        $data_debit = [];
+        $data_kredit = [];
+        $data_saldo = [];
+        for ($i=1; $i < count($kategori)+1 ; $i++) { 
+            $tmp_debit = 0;
+            if(!empty($data_perbulan[$i]["debit"])){
+                $tmp_debit = intVal($data_perbulan[$i]["debit"]);
+            }
+            $data_debit[] = $tmp_debit;
+
+            $tmp_kredit = 0;
+            if(!empty($data_perbulan[$i]["kredit"])){
+                $tmp_kredit = intVal($data_perbulan[$i]["kredit"]);
+            }
+            $data_kredit[] = $tmp_kredit;
+            
+            $data_saldo[] = intVal($tmp_debit - $tmp_kredit);
+        }
+
+        $response_data['status']      = true;
+        $response_data['kategori']    = $kategori;
+        $response_data['data_debit']  = $data_debit;
+        $response_data['data_kredit'] = $data_kredit;
+        $response_data['data_saldo']  = $data_saldo;
+        $response_data['message']     = "Berhasil Mengambil Data";
+
+        echo json_encode($response_data);
     }
 }
 

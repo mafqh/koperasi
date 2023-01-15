@@ -5,7 +5,6 @@
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800"><?php echo $title ?></h1>
                 </div>
-
                     <!-- Content Row -->
                     <div class="row">
 
@@ -85,8 +84,89 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-xl-12 col-md-12 mb-4">
+                            <div class="col-md-3 row float-right mb-3">
+                                <select class="form-control" name="tahun" id="tahun" onchange="changeTahun(this)">
+                                    <?php for ($i=2017; $i <= 2050 ; $i++) { ?>
+                                        <option value="<?php echo $i ?>" <?php if (date("Y") == $i) {echo "selected";}?>>
+                                        <?php echo $i; ?>
+                                    <?php }?>
+                                </select>
+                            </div>
+                            <div class="col-md-12 float-left" id="chart"></div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
+
+<script>
+    function changeTahun(e) {
+        var tahun = $(e).val();
+        $.ajax({
+            url: '<?php echo base_url("admin/dashboard/dataChartTabungan/") ?>'+tahun,
+            type: 'GET'
+        })
+        .done(function (response) {
+            var data = JSON.parse(response);
+            Highcharts.chart('chart', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Chart Simpanan Tabungan Perbulan'
+                },
+                subtitle: {
+                    text: 'Tahun '+tahun
+                },
+                xAxis: {
+                    categories: data.kategori,
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Total'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.0f}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [
+                    {
+                        name: 'Debit',
+                        data: data.data_debit
+                    },
+                    {
+                        name: 'Kredit',
+                        data: data.data_kredit
+                    },
+                    {
+                        name: 'Saldo',
+                        data: data.data_saldo
+                    },
+                ]
+            }); 
+        })
+        .fail(function () {
+            console.log("error");
+        });
+    }
+
+    $("#tahun").trigger("change");
+</script>

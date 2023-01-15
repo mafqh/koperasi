@@ -1,12 +1,12 @@
 <div class="container-fluid">
     <!-- Page Heading -->
     <div class="row mb-4">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <h1 class="h3 mb-0 text-gray-800"><?php echo $title ?></h1>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="row">
-                <div class="col-md-1 pt-2"><label>Tahun</label></div>
+                <div class="col-md-2 pt-2"><label>Tahun</label></div>
                 <div class="col-md-5">
                     </option>
 
@@ -17,11 +17,8 @@
                         <?php }?>
                     </select>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-5">
                     <a href="<?php echo base_url('admin/SimpananSukarela/exportExcel/').date('Y'); ?>" class="btn btn-success shadow-sm" id="btn-export-excel"><i class="fas fa-file-excel fa-sm text-white-50"></i> Export Excel</a>
-                </div>
-                <div class="col-md-3">
-                    <a href="<?php echo base_url('admin/SimpananSukarela/exportPdf/').date('Y'); ?>" class="btn btn-danger shadow-sm" id="btn-export-pdf"><i class="fas fa-file-pdf fa-sm text-white-50"></i> Report Pdf</a>
                 </div>
             </div>
         </div>
@@ -72,8 +69,6 @@
     function changeTahun(e) {
         var tahun = $(e).val();
         var url_excel = '<?php echo base_url('admin/SimpananSukarela/exportExcel/'); ?>' + tahun;
-        var url_pdf = '<?php echo base_url('admin/SimpananSukarela/exportPdf/'); ?>' + tahun;
         $("#btn-export-excel").attr("href", url_excel);
-        $("#btn-export-pdf").attr("href", url_pdf);
     }
 </script>

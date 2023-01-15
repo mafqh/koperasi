@@ -26,5 +26,6 @@
 
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="<?= base_url() ?>assets/vendor/jquery/jquery-3.5.1.js"></script>
+<script src="<?= base_url() ?>assets/vendor/highchart/highchart.js"></script>
 <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/jquery/jquery.dataTables.min.css">
 
