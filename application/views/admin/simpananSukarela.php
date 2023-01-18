@@ -5,22 +5,24 @@
             <h1 class="h3 mb-0 text-gray-800"><?php echo $title ?></h1>
         </div>
         <div class="col-md-4">
-            <div class="row">
-                <div class="col-md-2 pt-2"><label>Tahun</label></div>
-                <div class="col-md-5">
-                    </option>
-
-                    <select class="form-control" name="tahun" id="tahun" onchange="changeTahun(this)">
-                        <?php for ($i=2017; $i <= 2050 ; $i++) { ?>
-                            <option value="<?php echo $i ?>" <?php if (date("Y") == $i) {echo "selected";}?>>
-                            <?php echo $i; ?>
-                        <?php }?>
-                    </select>
+            <?php if($this->session->userdata('hak_akses') == 1){ ?>
+                <div class="row">
+                    <div class="col-md-2 pt-2"><label>Tahun</label></div>
+                    <div class="col-md-5">
+                        </option>
+    
+                        <select class="form-control" name="tahun" id="tahun" onchange="changeTahun(this)">
+                            <?php for ($i=2017; $i <= 2050 ; $i++) { ?>
+                                <option value="<?php echo $i ?>" <?php if (date("Y") == $i) {echo "selected";}?>>
+                                <?php echo $i; ?>
+                            <?php }?>
+                        </select>
+                    </div>
+                    <div class="col-md-5">
+                        <a href="<?php echo base_url('admin/SimpananSukarela/exportExcel/').date('Y'); ?>" class="btn btn-success shadow-sm" id="btn-export-excel"><i class="fas fa-file-excel fa-sm text-white-50"></i> Export Excel</a>
+                    </div>
                 </div>
-                <div class="col-md-5">
-                    <a href="<?php echo base_url('admin/SimpananSukarela/exportExcel/').date('Y'); ?>" class="btn btn-success shadow-sm" id="btn-export-excel"><i class="fas fa-file-excel fa-sm text-white-50"></i> Export Excel</a>
-                </div>
-            </div>
+            <?php } ?>
         </div>
     </div>
 

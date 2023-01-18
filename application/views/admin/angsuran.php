@@ -19,7 +19,7 @@
                         </div>
                     </div>
 
-                    <?php if($pinjaman->status == "belum lunas"){ ?>
+                    <?php if($pinjaman->status == "belum lunas" && $this->session->userdata('hak_akses') == 1){ ?>
                         <a class="mb-2 mt-2 btn btn-sm btn-success" href="<?php echo base_url('admin/pinjaman/tambahAngsuran/'.$pinjaman->id) ?>"><i class="fas fa-plus"></i> Tambah Angsuran</a>
                     <?php } ?>
                     <table class="table table-striped table-bordered" id="myTable" width="100%" cellspacing="0">
