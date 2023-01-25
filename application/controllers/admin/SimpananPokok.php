@@ -136,7 +136,7 @@ class SimpananPokok extends CI_Controller{
         $sheet = $spreadsheet->getActiveSheet();
 
         //set widht kolom
-        $batas = "G";
+        $batas = "F";
         for($i = 'A'; $i <= 'Z'; $i++) {
             $sheet->getColumnDimension($i)->setAutoSize(true);
             if($batas == $i){
@@ -152,198 +152,52 @@ class SimpananPokok extends CI_Controller{
         $sheet->setCellValue('A4', 'NO.');
         $sheet->setCellValue('B4', 'NO. ANGGOTA');
         $sheet->setCellValue('C4', 'NAMA ANGGOTA');
-        $sheet->setCellValue('D4', 'JUMLAH SIMPANAN POKOK');
-        $sheet->setCellValue('D4', 'SISA YANG HARUS DIBAYAR');
         $sheet->setCellValue('D4', 'STATUS');
+        $sheet->setCellValue('E4', 'JUMLAH SIMPANAN POKOK');
+        $sheet->setCellValue('F4', 'SISA YANG HARUS DIBAYAR');
         
-        $sheet->setCellValue('E4', 'BULAN');
-        $sheet->mergeCells("E4:AN4");
+        $sheet->getStyle("A4:F4")->getFont()->setBold(true);
+        $sheet->getStyle('A4:F4')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+        $sheet->getStyle('A4:F4')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
-        $sheet->setCellValue('AO4', 'SALDO AKHIR '.$tahun);
-        $sheet->mergeCells("AO4:AO6");
-        
-        $sheet->getStyle("A4:AO6")->getFont()->setBold(true);
-        $sheet->getStyle('A4:AO6')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
-        $sheet->getStyle('A4:AO6')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-
-        //set bulan
-        $bulan = [
-            "JANUARI",
-            "FEBRUARI",
-            "MARET",
-            "APRIL",
-            "MEI",
-            "JUNI",
-            "JULI",
-            "AGUSTUS",
-            "SEPTEMBER", 
-            "OKTOBER",
-            "NOVEMBER",
-            "DESEMBER"
-        ];
-
-        $batas = "AN";
-        $index_bulan = 0;
-        for($i = 'E'; $i <= 'Z'; $i++) {
-            $batas_awal_bulan = $i;
-            $sheet->setCellValue($batas_awal_bulan.'5', $bulan[$index_bulan++]);
-            $sheet->setCellValue($batas_awal_bulan.'6', "DEBET");
-            $i++;
-            $sheet->setCellValue($i.'6', "KREDIT");
-            $i++;
-            $batas_akhir_bulan = $i;
-            $sheet->setCellValue($batas_akhir_bulan.'6', "SALDO");
-            
-            $sheet->mergeCells($batas_awal_bulan."5:".$batas_akhir_bulan."5");
-            if($batas == $i){
-                break;
-            }
-        }
-    
-        //list anggota
-        $anggota = $this->koperasiModel->get_data_where("data_anggota","hak_akses",2)->result();
-
-        //get total simpanan tahun lalu 
-        $jumlah_tahun_lalu = 0;
-        $data_tahun_lalu = [];
-        $tahun_lalu = $this->koperasiModel->get_tabungan_tahun_lalu($tahun);
-        if(!empty($tahun_lalu)){
-            foreach ($tahun_lalu as $key => $value) {
-                $total = $value->total;
-                if($value->jenis_simpanan == "pengeluaran"){
-                    $total = -$value->total;
-                }
-
-                if(!empty($data_tahun_lalu[$value->id_anggota])){
-                    $data_tahun_lalu[$value->id_anggota] += $total;
-                }else{
-                    $data_tahun_lalu[$value->id_anggota] = $total;
-                }
-
-                $jumlah_tahun_lalu += $total;
-            }
-        }
-
-        //get total simpanan tahun ini
-        $jumlah_tahun_ini = 0;
-        $data_tahun_ini = [];
-        $tahun_ini = $this->koperasiModel->get_tabungan_tahun_ini($tahun);
-        if(!empty($tahun_ini)){
-            foreach ($tahun_ini as $key => $value) {
-                $total = $value->total;
-                if($value->jenis_simpanan == "pengeluaran"){
-                    $total = -$value->total;
-                }
-
-                if(!empty($data_tahun_ini[$value->id_anggota])){
-                    $data_tahun_ini[$value->id_anggota] += $total;
-                }else{
-                    $data_tahun_ini[$value->id_anggota] = $total;
-                }
-
-                $jumlah_tahun_ini += $total;
-            }
-        }
-
-        //get total simpanan perbulan
-        $data_perbulan = [];
-        $perbulan = $this->koperasiModel->get_tabungan_perbulan($tahun);
-        if(!empty($perbulan)){
-            foreach ($perbulan as $key => $value) {
-                $total = $value->total;
-                if($value->jenis_simpanan == "pengeluaran"){
-                    $data_perbulan[$value->id_anggota][$value->bulan]["kredit"] = $total;
-                }else{
-                    $data_perbulan[$value->id_anggota][$value->bulan]["debit"] = $total;
-                }
-            }
-        }
-        
+        $datas = $this->koperasiModel->get_all_data_biaya_administrasi(); 
         //isi data
-        $jumlah_perbulan = [];
+        $total_simpanan_pokok = 0;
+        $total_sisa = 0;
         $no = 1;
-        $x = 7;
-        if (!empty($anggota)) {
-            foreach ($anggota as $row) {
+        $x = 5;
+        if (!empty($datas)) {
+            foreach ($datas as $row) {
+                $total_biaya_admin = 200000;
+                $total_bayar = $row->total;
+                $sisa = $total_biaya_admin - $total_bayar;
+
+                $total_simpanan_pokok += $total_bayar;
+                $total_sisa += $sisa;
+
+                $status = "Lunas";
+                if($sisa > 0){
+                    $status = "Belum Lunas";
+                }
+
                 $sheet->setCellValueExplicit('A' . $x, $no++, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
                 $sheet->setCellValueExplicit('B' . $x, $row->id_anggota, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
                 $sheet->setCellValueExplicit('C' . $x, $row->nama_anggota, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-
-                $saldo_tahun_lalu = 0;
-                if(!empty($data_tahun_lalu[$row->id_anggota])){
-                    $saldo_tahun_lalu = $data_tahun_lalu[$row->id_anggota];
-                }
-                $sheet->setCellValueExplicit('D' . $x, $saldo_tahun_lalu, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
-
-                $batas = "AN";
-                $index_bulan = 1;
-                for($i = 'E'; $i <= 'Z'; $i++) {
-                    $debit  = 0;
-                    $kredit = 0;
-                    if(!empty($data_perbulan[$row->id_anggota][$index_bulan]["kredit"])){
-                        $kredit = $data_perbulan[$row->id_anggota][$index_bulan]["kredit"];
-                    }
-                    
-                    if(!empty($data_perbulan[$row->id_anggota][$index_bulan]["debit"])){
-                        $debit = $data_perbulan[$row->id_anggota][$index_bulan]["debit"];
-                    }
-                    $sheet->setCellValueExplicit($i. $x, $debit, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
-                    $i++;
-                    $sheet->setCellValueExplicit($i. $x, $kredit, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
-                    $i++;
-                    $sheet->setCellValueExplicit($i. $x, $debit-$kredit, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
-
-                    //jumlah perbulan 
-                    if(!empty($jumlah_perbulan[$i]["kredit"])){
-                        $jumlah_perbulan[$index_bulan]["kredit"] += $kredit;
-                    }else{
-                        $jumlah_perbulan[$index_bulan]["kredit"] = $kredit;
-                    }
-
-                    if(!empty($jumlah_perbulan[$index_bulan]["debit"])){
-                        $jumlah_perbulan[$index_bulan]["debit"] += $debit;
-                    }else{
-                        $jumlah_perbulan[$index_bulan]["debit"] = $debit;
-                    }
-
-                    $index_bulan++;
-                    if($batas == $i){
-                        break;
-                    }
-                }
-
-                $saldo_tahun_ini = 0;
-                if(!empty($data_tahun_ini[$row->id_anggota])){
-                    $saldo_tahun_ini = $data_tahun_ini[$row->id_anggota];
-                }
-                $sheet->setCellValueExplicit('AO' . $x, $saldo_tahun_ini, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
-
-                // $sheet->getStyle('D' . $x)->getAlignment()->setWrapText(true);
+                $sheet->setCellValueExplicit('D' . $x, $status, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                $sheet->setCellValueExplicit('E' . $x, $total_bayar, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
+                $sheet->setCellValueExplicit('F' . $x, $sisa, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
+                
                 $x++;
             }
         }
 
         //jumlah
-        $sheet->setCellValueExplicit('C' . $x, "JUMLAH", \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-        $sheet->setCellValueExplicit('D' . $x, $jumlah_tahun_lalu, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
+        $sheet->setCellValueExplicit('A' . $x, "JUMLAH", \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+        $sheet->mergeCells("A".$x.":D".$x);
+        $sheet->setCellValueExplicit('E' . $x, $total_simpanan_pokok, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
+        $sheet->setCellValueExplicit('F' . $x, $total_sisa, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
 
-        $batas = "AN";
-        $index_bulan = 1;
-        for($i = 'E'; $i <= 'Z'; $i++) {
-            $total = $jumlah_perbulan[$index_bulan]["debit"] - $jumlah_perbulan[$index_bulan]["kredit"];
-            $sheet->setCellValueExplicit($i. $x, $jumlah_perbulan[$index_bulan]["debit"], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
-            $i++;
-            $sheet->setCellValueExplicit($i. $x, $jumlah_perbulan[$index_bulan]["kredit"], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
-            $i++;
-            $sheet->setCellValueExplicit($i. $x, $total, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
-
-            $index_bulan++;
-            if($batas == $i){
-                break;
-            }
-        }
-        $sheet->setCellValueExplicit('AO' . $x, $jumlah_tahun_ini, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
-        $sheet->getStyle("C".$x.":AO".$x)->getFont()->setBold(true);
+        $sheet->getStyle("A".$x.":F".$x)->getFont()->setBold(true);
         $x++;
 
         //set border
@@ -356,14 +210,14 @@ class SimpananPokok extends CI_Controller{
                 ],
             ],
         ];
-        $sheet->getStyle('A4:AO' . $batas_akhir)->applyFromArray($styleArray);
+        $sheet->getStyle('A4:F' . $batas_akhir)->applyFromArray($styleArray);
         //set align
-        $sheet->getStyle('A7:AO' . $batas_akhir)->getAlignment()->setVertical(Alignment::VERTICAL_TOP);
-        $sheet->getStyle('A7:AO' . $batas_akhir)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle('B7:AO' . $batas_akhir)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
+        $sheet->getStyle('A5:F' . $batas_akhir)->getAlignment()->setVertical(Alignment::VERTICAL_TOP);
+        $sheet->getStyle('A5:F' . $batas_akhir)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('B5:F' . $batas_akhir)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $writer = new Xlsx($spreadsheet);
-        $filename = 'LAPORAN TABUNGAN ANGGOTA KOPERASI BOGOR GADING RESIDENCE TAHUN ' .$tahun;
+        $filename = 'LAPORAN SIMPANAN POKOK ANGGOTA KOPERASI BOGOR GADING RESIDENCE TANGGAL '.date('d-m-Y');
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
         header('Cache-Control: max-age=0');

@@ -202,6 +202,15 @@ class KoperasiModel extends CI_model{
         $this->db->group_by(['simpanan_tabungan.id_anggota', 'simpanan_tabungan.jenis_simpanan', 'MONTH(simpanan_tabungan.tanggal)']);
         return $this->db->get()->result();
     }
+
+    public function get_all_data_biaya_administrasi()
+    {
+        $this->db->select('data_anggota.*, SUM(biaya_administrasi.jumlah) as total');
+        $this->db->from('data_anggota');
+        $this->db->join('biaya_administrasi','biaya_administrasi.id_anggota = data_anggota.id_anggota', 'LEFT');
+        $this->db->group_by('data_anggota.id_anggota');
+        return $this->db->get()->result();
+    }
 }
 
 ?>
