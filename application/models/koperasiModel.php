@@ -211,6 +211,15 @@ class KoperasiModel extends CI_model{
         $this->db->group_by('data_anggota.id_anggota');
         return $this->db->get()->result();
     }
+
+    public function get_all_data_simpanan_wajib()
+    {
+        $this->db->select('data_anggota.*, SUM(simpanan_wajib.jumlah) as total');
+        $this->db->from('data_anggota');
+        $this->db->join('simpanan_wajib','simpanan_wajib.id_anggota = data_anggota.id_anggota', 'LEFT');
+        $this->db->group_by('data_anggota.id_anggota');
+        return $this->db->get()->result();
+    }
 }
 
 ?>
