@@ -1,4 +1,7 @@
 <?php
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Pinjaman extends CI_Controller{
 
@@ -356,6 +359,93 @@ class Pinjaman extends CI_Controller{
             redirect('admin/dashboard');
         }
     }
+
+    public function exportExcel() 
+    {
+        $spreadsheet = new Spreadsheet();
+        \PhpOffice\PhpSpreadsheet\Cell\Cell::setValueBinder(new \PhpOffice\PhpSpreadsheet\Cell\AdvancedValueBinder());
+
+        $sheet = $spreadsheet->getActiveSheet();
+
+        //set widht kolom
+        $batas = "K";
+        for($i = 'A'; $i <= 'Z'; $i++) {
+            $sheet->getColumnDimension($i)->setAutoSize(true);
+            if($batas == $i){
+                break;
+            }
+        }
+
+        //set header tingkat 1
+        $sheet->setCellValue('A1', "LAPORAN PINJAMAN ANGGOTA KOPERASI BOGOR GADING RESIDENCE");
+        $sheet->getStyle("A1")->getFont()->setSize(16)->setBold(true);
+        $sheet->mergeCells("A1:H1");
+        
+        $sheet->setCellValue('A4', 'NO.');
+        $sheet->setCellValue('B4', 'NO. ANGGOTA');
+        $sheet->setCellValue('C4', 'NAMA ANGGOTA');
+        $sheet->setCellValue('D4', 'NO PINJAMAN');
+        $sheet->setCellValue('E4', 'TANGGAL PEMINJAMAN');
+        $sheet->setCellValue('F4', 'JUMLAH PINJAMAN');
+        $sheet->setCellValue('G4', 'LAMA PINJAMAN');
+        $sheet->setCellValue('H4', 'STATUS');
+        $sheet->setCellValue('I4', 'JUMLAH PEMBAYARAN');
+        $sheet->setCellValue('J4', 'JUMLAH PERIODE PEMBAYARAN');
+        $sheet->setCellValue('K4', 'SISA YANG HARUS DIBAYAR');
+        
+        $sheet->getStyle("A4:K4")->getFont()->setBold(true);
+        $sheet->getStyle('A4:K4')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+        $sheet->getStyle('A4:K4')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
+        $datas = $this->koperasiModel->get_all_data_pinjaman(); 
+        //isi data
+        $total_simpanan_pokok = 0;
+        $total_sisa = 0;
+        $no = 1;
+        $x = 5;
+        if (!empty($datas)) {
+            foreach ($datas as $row) {
+                $sisa = $row->jumlah_pinjaman - $row->total_bayar;
+
+                $sheet->setCellValueExplicit('A' . $x, $no++, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                $sheet->setCellValueExplicit('B' . $x, $row->nik, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                $sheet->setCellValueExplicit('C' . $x, $row->nama_anggota, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                $sheet->setCellValueExplicit('D' . $x, $row->no_pinjaman, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                $sheet->setCellValueExplicit('E' . $x, $row->tanggal_pinjaman, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                $sheet->setCellValueExplicit('F' . $x, $row->jumlah_pinjaman, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
+                $sheet->setCellValueExplicit('G' . $x, $row->lama." Bulan", \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                $sheet->setCellValueExplicit('H' . $x, ucwords($row->status), \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                $sheet->setCellValueExplicit('I' . $x, $row->total_bayar, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
+                $sheet->setCellValueExplicit('J' . $x, $row->total_periode, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
+                $sheet->setCellValueExplicit('K' . $x, $sisa, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_NUMERIC);
+                
+                $x++;
+            }
+        }
+
+        //set border
+        $batas_akhir = intval($x) - 1;
+        $styleArray = [
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => '00000000'],
+                ],
+            ],
+        ];
+        $sheet->getStyle('A4:K' . $batas_akhir)->applyFromArray($styleArray);
+        //set align
+        $sheet->getStyle('A5:K' . $batas_akhir)->getAlignment()->setVertical(Alignment::VERTICAL_TOP);
+        $sheet->getStyle('A5:K' . $batas_akhir)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('B5:K' . $batas_akhir)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
+
+        $writer = new Xlsx($spreadsheet);
+        $filename = 'LAPORAN PINJAMAN ANGGOTA KOPERASI BOGOR GADING RESIDENCE TANGGAL '.date('d-m-Y');
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+	}
 }
 
 ?>

@@ -1,6 +1,9 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800"><?php echo $title ?></h1>
+        <?php if( $this->session->userdata('hak_akses') == 1){ ?>
+            <a href="<?php echo base_url('admin/pinjaman/exportExcel'); ?>" class="btn btn-sm btn-success shadow-sm" id="btn-export-excel"><i class="fas fa-file-excel fa-sm text-white-50"></i> Export Excel</a>
+        <?php } ?>
     </div>
 
     <div class="row">

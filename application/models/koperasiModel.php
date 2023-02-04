@@ -220,6 +220,17 @@ class KoperasiModel extends CI_model{
         $this->db->group_by('data_anggota.id_anggota');
         return $this->db->get()->result();
     }
+
+    public function get_all_data_pinjaman()
+    {
+        $this->db->select('data_pinjaman.*, SUM(data_angsuran.jumlah_angsuran) as total_bayar,
+                           COUNT(data_angsuran.id) as total_periode, data_anggota.nik, data_anggota.nama_anggota');
+        $this->db->from('data_pinjaman');
+        $this->db->join('data_anggota','data_anggota.id_anggota = data_pinjaman.id_anggota');
+        $this->db->join('data_angsuran','data_angsuran.id_pinjaman = data_pinjaman.id', 'LEFT');
+        $this->db->group_by('data_pinjaman.id');
+        return $this->db->get()->result();
+    }
 }
 
 ?>
