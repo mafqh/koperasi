@@ -236,7 +236,7 @@ class SimpananPokok extends CI_Controller{
         $data = [];
         $data["listData"] = $this->db->get_where("biaya_administrasi", ["id_anggota" => $id])->result();
         $data["anggota"] =  $this->db->get_where("data_anggota",["id_anggota" => $id])->row();
-        $this->pdf->filename = "Simpanan Pokok.pdf";
+        $this->pdf->filename = "Simpanan Pokok ".$data["anggota"]->nama_anggota." ".date("dmY").".pdf";
         $html = $this->load->view('admin/pdfSimpananPokok', $data, TRUE);
 
         $this->pdf->load_html($html);

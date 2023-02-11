@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-		<title>Koperasi Gading - Simpanan Pokok</title>
+		<title>Koperasi Gading - Simpanan Wajib</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -61,7 +61,7 @@
 
 	<body>
         <h2 class="title text-center">KOPERASI BOGOR GADING RESIDENCE</h2>
-        <h4 class="title text-center">SIMPANAN POKOK</h4>
+        <h4 class="title text-center">SIMPANAN WAJIB</h4>
         <p class="paragraph text-right" style="margin-bottom: 10px;"><?php echo date("d/m/Y") ?></p>
         <table style="margin-bottom:20px">
             <tr>
@@ -107,7 +107,7 @@
             <?php if(!empty($listData)){ ?>
             <tbody>
                 <?php
-                    $nominal = 200000;
+                    $nominal = 240000;
                     $no = 1;
                     $total = 0;
                     $sisa = 0;

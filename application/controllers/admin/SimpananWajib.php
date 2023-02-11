@@ -71,6 +71,7 @@ class SimpananWajib extends CI_Controller{
     public function detailSimpananWajib()
     {
         $anggota = $this->uri->segment(4);
+        $data['id_anggota'] = $anggota;
         $data['title'] = "Detail Simpanan Wajib";
         $data['anggota'] = $this->koperasiModel->get_data_wajib_by_anggota($anggota)->result();
         $this->load->view('templates_admin/header', $data);
@@ -221,6 +222,27 @@ class SimpananWajib extends CI_Controller{
         header('Cache-Control: max-age=0');
         $writer->save('php://output');
 	}
+
+    public function exportPdf($id)
+    {
+        $this->load->library('pdf');
+
+        $this->pdf->setPaper('A4', 'portrait');
+        $this->pdf->set_option('isRemoteEnabled', TRUE);
+        $this->pdf->set_option('defaultFont', 'arial');
+        $this->pdf->set_base_path("/");
+        $data = [];
+        $data["listData"] = $this->db->get_where("simpanan_wajib", ["id_anggota" => $id])->result();
+        $data["anggota"] =  $this->db->get_where("data_anggota",["id_anggota" => $id])->row();
+        $this->pdf->filename = "Simpanan Wajib ".$data["anggota"]->nama_anggota." ".date("dmY").".pdf";
+        $html = $this->load->view('admin/pdfSimpananWajib', $data, TRUE);
+
+        $this->pdf->load_html($html);
+        $this->pdf->render();
+
+        $output = $this->pdf->output();
+        $this->pdf->stream($this->pdf->filename, array("Attachment" => FALSE));
+    }
 }
 
 ?>
