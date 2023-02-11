@@ -3,6 +3,7 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800"><?php echo $title ?></h1>
+        <a href="<?php echo base_url('admin/SimpananPokok/exportPdf/').$id_anggota; ?>" target="_blank" class="btn btn-sm btn-danger shadow-sm" id="btn-export-pdf"><i class="fas fa-file-pdf fa-sm"></i> Export PDF</a>
     </div>
 <?php $nominal = 200000; ?>
     <div class="alert alert-success font-weight-bold mb-4" style="width: 65%">Jumlah Simpanan Pokok yang harus dibayar <?= "Rp " . number_format($nominal,0,',','.'); ?></div>

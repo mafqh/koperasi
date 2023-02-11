@@ -73,6 +73,7 @@ class SimpananPokok extends CI_Controller{
     public function detailSimpananPokok()
     {
         $anggota = $this->uri->segment(4);
+        $data['id_anggota'] = $anggota;
         $data['title'] = "Detail Simpanan Pokok";
         $data['anggota'] = $this->koperasiModel->get_data_administrasi_by_anggota($anggota)->result();
         $this->load->view('templates_admin/header', $data);
@@ -223,6 +224,27 @@ class SimpananPokok extends CI_Controller{
         header('Cache-Control: max-age=0');
         $writer->save('php://output');
 	}
+
+    public function exportPdf($id)
+    {
+        $this->load->library('pdf');
+
+        $this->pdf->setPaper('A4', 'portrait');
+        $this->pdf->set_option('isRemoteEnabled', TRUE);
+        $this->pdf->set_option('defaultFont', 'arial');
+        $this->pdf->set_base_path("/");
+        $data = [];
+        $data["listData"] = $this->db->get_where("biaya_administrasi", ["id_anggota" => $id])->result();
+        $data["anggota"] =  $this->db->get_where("data_anggota",["id_anggota" => $id])->row();
+        $this->pdf->filename = "Simpanan Pokok.pdf";
+        $html = $this->load->view('admin/pdfSimpananPokok', $data, TRUE);
+
+        $this->pdf->load_html($html);
+        $this->pdf->render();
+
+        $output = $this->pdf->output();
+        $this->pdf->stream($this->pdf->filename, array("Attachment" => FALSE));
+    }
 }
 
 ?>
