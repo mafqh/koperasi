@@ -232,7 +232,7 @@ class SimpananWajib extends CI_Controller{
         $this->pdf->set_option('defaultFont', 'arial');
         $this->pdf->set_base_path("/");
         $data = [];
-        $data["listData"] = $this->db->get_where("simpanan_wajib", ["id_anggota" => $id])->result();
+        $data["listData"] = $this->db->order_by('id_simpanan_wajib', 'ASC')->get_where("simpanan_wajib", ["id_anggota" => $id])->result();
         $data["anggota"] =  $this->db->get_where("data_anggota",["id_anggota" => $id])->row();
         $this->pdf->filename = "Simpanan Wajib ".$data["anggota"]->nama_anggota." ".date("dmY").".pdf";
         $html = $this->load->view('admin/pdfSimpananWajib', $data, TRUE);

@@ -234,7 +234,7 @@ class SimpananPokok extends CI_Controller{
         $this->pdf->set_option('defaultFont', 'arial');
         $this->pdf->set_base_path("/");
         $data = [];
-        $data["listData"] = $this->db->get_where("biaya_administrasi", ["id_anggota" => $id])->result();
+        $data["listData"] = $this->db->order_by('id_biaya_administrasi', 'ASC')->get_where("biaya_administrasi", ["id_anggota" => $id])->result();
         $data["anggota"] =  $this->db->get_where("data_anggota",["id_anggota" => $id])->row();
         $this->pdf->filename = "Simpanan Pokok ".$data["anggota"]->nama_anggota." ".date("dmY").".pdf";
         $html = $this->load->view('admin/pdfSimpananPokok', $data, TRUE);
