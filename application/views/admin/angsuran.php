@@ -1,6 +1,7 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800"><?php echo $title." ".$pinjaman->no_pinjaman ?><br><small>Pinjaman <?php echo $anggota->nama_anggota ?></small></h1>
+        <a href="<?php echo base_url('admin/pinjaman/exportPdf/').$id_pinjaman; ?>" target="_blank" class="btn btn-sm btn-danger shadow-sm" id="btn-export-pdf"><i class="fas fa-file-pdf fa-sm"></i> Export PDF</a>
     </div>
 
     <div class="row">

@@ -185,6 +185,7 @@ class Pinjaman extends CI_Controller{
     {
         $data['title'] = "List Angsuran";
         $pinjaman = $this->db->get_where('data_pinjaman', ['id' => $id])->row();
+        $data['id_pinjaman'] = $id;
         $sudah_dibayar = $this->db->select('SUM(jumlah_angsuran) as total')->from('data_angsuran')->where('id_pinjaman', $pinjaman->id)->get()->row()->total;
         $data['pinjaman'] = $pinjaman;
         if($pinjaman->jumlah_pinjaman > $sudah_dibayar){
@@ -446,6 +447,29 @@ class Pinjaman extends CI_Controller{
         header('Cache-Control: max-age=0');
         $writer->save('php://output');
 	}
+
+    public function exportPdf($id)
+    {
+        $this->load->library('pdf');
+
+        $this->pdf->setPaper('A4', 'portrait');
+        $this->pdf->set_option('isRemoteEnabled', TRUE);
+        $this->pdf->set_option('defaultFont', 'arial');
+        $this->pdf->set_base_path("/");
+        $data = [];
+        $data["listData"] = $this->db->order_by('id', 'ASC')->get_where("data_angsuran", ["id_pinjaman" => $id])->result();
+        $pinjaman = $this->db->get_where('data_pinjaman', ['id' => $id])->row();
+        $data['pinjaman'] = $pinjaman;
+        $data['anggota']  = $this->db->get_where('data_anggota',['id_anggota'=> $pinjaman->id_anggota])->row();
+        $this->pdf->filename = "Pinjaman ".$pinjaman->no_pinjaman." ".date("dmY").".pdf";
+        $html = $this->load->view('admin/pdfPinjaman', $data, TRUE);
+
+        $this->pdf->load_html($html);
+        $this->pdf->render();
+
+        $output = $this->pdf->output();
+        $this->pdf->stream($this->pdf->filename, array("Attachment" => FALSE));
+    }
 }
 
 ?>
