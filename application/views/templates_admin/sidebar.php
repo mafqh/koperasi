@@ -27,6 +27,7 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="<?php echo base_url('admin/dataJabatan') ?>">Data Jabatan</a>
                         <a class="collapse-item" href="<?php echo base_url('admin/dataPengurus') ?>">Data Pengurus</a>
                         <a class="collapse-item" href="<?php echo base_url('admin/dataAnggota') ?>">Data Anggota</a>
                     </div>
