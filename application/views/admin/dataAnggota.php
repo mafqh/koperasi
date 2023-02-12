@@ -2,6 +2,9 @@
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800"><?php echo $title ?></h1>
+        <?php if( $this->session->userdata('hak_akses') == 1){ ?>
+            <a href="<?php echo base_url('admin/dataAnggota/exportPdf'); ?>" class="btn btn-sm btn-danger shadow-sm" id="btn-export-pdf"><i class="fas fa-file-pdf fa-sm"></i> Export PDF</a>
+        <?php } ?>
     </div>
 
     <div class="row">

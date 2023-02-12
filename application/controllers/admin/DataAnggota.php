@@ -188,6 +188,26 @@ class DataAnggota extends CI_Controller{
             </div>');
             redirect('admin/dataAnggota');
     }
+
+    public function exportPdf()
+    {
+        $this->load->library('pdf');
+
+        $this->pdf->setPaper('A4', 'landscape');
+        $this->pdf->set_option('isRemoteEnabled', TRUE);
+        $this->pdf->set_option('defaultFont', 'arial');
+        $this->pdf->set_base_path("/");
+        $data = [];
+        $data["listData"] = $this->db->order_by('id_anggota', 'ASC')->get_where("data_anggota", ['hak_akses'=>2])->result();
+        $this->pdf->filename = "Data Anggota ".date("dmY").".pdf";
+        $html = $this->load->view('admin/pdfAnggota', $data, TRUE);
+
+        $this->pdf->load_html($html);
+        $this->pdf->render();
+
+        $output = $this->pdf->output();
+        $this->pdf->stream($this->pdf->filename, array("Attachment" => FALSE));
+    }
 }
 
 ?>
