@@ -18,6 +18,10 @@ class KoperasiModel extends CI_model{
         $this->db->insert($table, $data);
     }
 
+    public function insert_batch($data, $table){
+        $this->db->insert_batch($table, $data);
+    }
+
     public function update_data($table, $data, $where){
         $this->db->update($table, $data, $where);
     }
