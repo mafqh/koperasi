@@ -139,6 +139,14 @@ class DataJabatan extends CI_Controller{
 
 
         $data['title'] = "Hak Akses";
+        $data_hak_akses = $this->db->get_where('hak_akses', ['id_jabatan' => $id])->result();
+        $hak_akses = [];
+        if(!empty($data_hak_akses)){
+            foreach ($data_hak_akses as $value) {
+                $hak_akses[$value->menu][$value->fungsi] = "checked";
+            }
+        }
+        $data['hak_akses'] = $hak_akses;
         $data['jabatan'] = $this->db->get_where('data_jabatan',['id_jabatan'=> $id])->row();
         $this->load->view('templates_admin/header', $data);
         $this->load->view('templates_admin/sidebar');
