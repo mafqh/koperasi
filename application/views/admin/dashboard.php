@@ -108,7 +108,7 @@
     function changeTahun(e) {
         var tahun = $(e).val();
         $.ajax({
-            url: '<?php echo base_url("admin/dashboard/dataChartTabungan/") ?>'+tahun,
+            url: '<?php echo base_url("dashboard/dataChartTabungan/") ?>'+tahun,
             type: 'GET'
         })
         .done(function (response) {

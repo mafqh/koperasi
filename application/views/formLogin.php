@@ -1,6 +1,6 @@
 <?php 
 if($this->session->userdata('hak_akses')){
-    redirect('admin/dashboard');
+    redirect('dashboard');
 }
 
 ?>

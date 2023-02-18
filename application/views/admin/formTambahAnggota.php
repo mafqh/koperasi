@@ -8,7 +8,7 @@
     <div class="card"  style="width: 60%; margin-bottom:100px">
         <div class="card-body">
 
-            <form method="POST" action="<?php echo base_url('admin/dataAnggota/tambahDataAksi') ?>" enctype="multipart/form-data">
+            <form method="POST" action="<?php echo base_url('dataAnggota/tambahDataAksi') ?>" enctype="multipart/form-data">
             
 
                 <div class="form-group">

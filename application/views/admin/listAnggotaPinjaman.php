@@ -29,7 +29,7 @@
                                 <td><?php echo $a->no_telp ?></td>  
                                 <td>
                                     <center>                
-                                        <a class="btn btn-sm btn-success" href="<?php echo base_url('admin/pinjaman/tambahData/'. $a->id_anggota) ?>"><i class="fas fa-plus"></i> Pinjaman</a>
+                                        <a class="btn btn-sm btn-success" href="<?php echo base_url('pinjaman/tambahData/'. $a->id_anggota) ?>"><i class="fas fa-plus"></i> Pinjaman</a>
                                     </center>
                                 </td>
                 

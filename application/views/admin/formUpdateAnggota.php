@@ -10,7 +10,7 @@
 
         <?php foreach ($anggota as $a) : ?>
 
-            <form method="POST" action="<?php echo base_url('admin/dataAnggota/updateDataAksi') ?>" enctype="multipart/form-data">
+            <form method="POST" action="<?php echo base_url('dataAnggota/updateDataAksi') ?>" enctype="multipart/form-data">
             
 
                 <div class="form-group">

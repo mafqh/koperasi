@@ -31,8 +31,9 @@ class Login extends CI_Controller {
 				$this->session->set_userdata('photo',$cek->photo);
 				$this->session->set_userdata('id_anggota',$cek->id_anggota);
 				$this->session->set_userdata('nik',$cek->nik);
-
-				redirect('admin/dashboard');
+				$this->session->set_userdata('status',$cek->status);
+				
+				$this->autoRedirect();
 			}
 		}
 	}
@@ -47,5 +48,21 @@ class Login extends CI_Controller {
 	{
 		$this->session->sess_destroy();
 		redirect('login');
+	}
+
+	public function autoRedirect()
+	{
+		$status = $this->session->userdata('status');
+		if($status != 1){
+			$akses = $this->koperasiModel->getOneAksesMenu($status);
+			if(!empty($akses)){
+				redirect($akses->menu);
+			}else{
+				$this->session->sess_destroy();
+				redirect('login');
+			}
+		}else{
+			redirect('dashboard');
+		}
 	}
 }

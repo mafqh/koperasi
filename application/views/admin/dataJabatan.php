@@ -9,8 +9,7 @@
             <div class="card">
                 <div class="card-body">
                     <?php echo $this->session->flashdata('pesan') ?>
-                    <a class="mb-2 mt-2 btn btn-sm btn-success" href="<?php echo base_url('admin/dataJabatan/tambahData') ?>"><i class="fas fa-plus"></i> Tambah Jabatan</a>
-                
+
                     <table class="table table-striped table-bordered" id="myTable">
                         <thead>
                             <th class="text-centre">No</th>
@@ -35,11 +34,9 @@
                                 <td><?php echo $pengurus ?></td>                                
                                 <td>
                                     <center>
-                                        <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/dataJabatan/updateData/'. $a->id_jabatan) ?>"><i class="fas fa-edit"></i></a>
-                
-                                        <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger" href="<?php echo base_url('admin/dataJabatan/deleteData/'. $a->id_jabatan) ?>"><i class="fas fa-trash"></i></a>
-                
-                                        <a class="btn btn-sm btn-success" href="<?php echo base_url('admin/dataJabatan/hakAkses/'. $a->id_jabatan) ?>"><i class="fas fa-key"></i></a>
+                                        <?php if($is_can_hak_akses){ ?>
+                                            <a class="btn btn-sm btn-success" href="<?php echo base_url('dataJabatan/hakAkses/'. $a->id_jabatan) ?>"><i class="fas fa-key"></i></a>
+                                        <?php } ?>
                                     </center>
                                 </td>
                 

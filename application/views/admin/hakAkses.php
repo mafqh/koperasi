@@ -7,7 +7,7 @@
 
     <div class="card"  style="margin-bottom:100px">
         <div class="card-body">
-            <form method="POST" action="<?php echo base_url('admin/dataJabatan/updateHakAkses') ?>" enctype="multipart/form-data">
+            <form method="POST" action="<?php echo base_url('dataJabatan/updateHakAkses') ?>" enctype="multipart/form-data">
                 <input type="hidden" name="id_jabatan" id="id_jabatan" value="<?php echo $jabatan->id_jabatan; ?>">
                 <div class="form-group">
                     <label>Nama Jabatan</label>
@@ -105,7 +105,7 @@
 
             _tot = $child.length
             _tot_checked = $childChecked.length;
-            if (_tot != _tot_checked) {
+            if (_tot_checked < 1) {
                 $parent.prop('checked', false);
             } else {
                 $parent.prop('checked', true);

@@ -5,7 +5,7 @@
 
     <div class="card"  style="width: 60%; margin-bottom:100px">
         <div class="card-body">
-            <form method="POST" action="<?php echo base_url('admin/pinjaman/tambahDataAksi') ?>" enctype="multipart/form-data">
+            <form method="POST" action="<?php echo base_url('pinjaman/tambahDataAksi') ?>" enctype="multipart/form-data">
                 <input type="hidden" name="id_anggota" id="id_anggota" value="<?php echo $anggota->id_anggota; ?>">
                 <div class="form-group">
                     <label>No. Anggota</label>

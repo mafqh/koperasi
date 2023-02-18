@@ -7,7 +7,7 @@
 
     <div class="card" style="width: 50%">
         <div class="card-body">
-            <form method="POST" action="<?php echo base_url('admin/SimpananSukarela/Ubah') ?>">
+            <form method="POST" action="<?php echo base_url('SimpananSukarela/Ubah') ?>">
 
             <div class="form-group">
                 <label>Jumlah</label>

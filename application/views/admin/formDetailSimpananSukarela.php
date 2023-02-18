@@ -3,7 +3,9 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800"><?php echo $title ?></h1>
-        <a href="<?php echo base_url('admin/simpananSukarela/exportPdf/').$id_anggota; ?>" target="_blank" class="btn btn-sm btn-danger shadow-sm" id="btn-export-pdf"><i class="fas fa-file-pdf fa-sm"></i> Export PDF</a>
+        <?php if($is_can_export_pdf){ ?>
+            <a href="<?php echo base_url('simpananSukarela/exportPdf/').$id_anggota; ?>" target="_blank" class="btn btn-sm btn-danger shadow-sm" id="btn-export-pdf"><i class="fas fa-file-pdf fa-sm"></i> Export PDF</a>
+        <?php } ?>
     </div>
 
     <div class="row">
@@ -19,7 +21,7 @@
                             <th>Pengeluaran/Pemasukan</th>
                             <th>Jumlah</th>
                             <th>Tanggal</th>
-                            <?php if($this->session->userdata('hak_akses') == 1){ ?>
+                            <?php if($is_can_edit || $is_can_delete){ ?>
                             <th>Aksi</th>
                             <?php } ?>
                         </tr>
@@ -41,11 +43,16 @@
                             <?php } ?>
                             <td><?= "Rp " . number_format($data->jumlah,0,',','.'); ?></td>
                             <td><?= date('d - M - Y', strtotime($data->tanggal)) ?></td>
-                            <?php if($this->session->userdata('hak_akses') == 1){ ?>
+                            <?php if($is_can_edit || $is_can_delete){ ?>
                             <td>
                                 <center>
-                                    <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/simpananSukarela/updateData/'. $data->id_simpanan_tabungan) ?>"><i class="fas fa-edit"></i></a>
-                                    <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger" href="<?php echo base_url('admin/simpananSukarela/deleteData/'. $data->id_simpanan_tabungan) ?>"><i class="fas fa-trash"></i></a>
+                                    <?php if($is_can_edit){ ?>
+                                        <a class="btn btn-sm btn-primary" href="<?php echo base_url('simpananSukarela/updateData/'. $data->id_simpanan_tabungan) ?>"><i class="fas fa-edit"></i></a>
+                                    <?php } ?>
+                                    
+                                    <?php if($is_can_delete){ ?>
+                                        <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger" href="<?php echo base_url('simpananSukarela/deleteData/'. $data->id_simpanan_tabungan) ?>"><i class="fas fa-trash"></i></a>
+                                    <?php } ?>
                                 </center>
                             </td>
                             <?php } ?>

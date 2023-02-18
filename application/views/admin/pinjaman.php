@@ -1,8 +1,8 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800"><?php echo $title ?></h1>
-        <?php if( $this->session->userdata('hak_akses') == 1){ ?>
-            <a href="<?php echo base_url('admin/pinjaman/exportExcel'); ?>" class="btn btn-sm btn-success shadow-sm" id="btn-export-excel"><i class="fas fa-file-excel fa-sm text-white-50"></i> Export Excel</a>
+        <?php if($is_can_export_excel){ ?>
+            <a href="<?php echo base_url('pinjaman/exportExcel'); ?>" class="btn btn-sm btn-success shadow-sm" id="btn-export-excel"><i class="fas fa-file-excel fa-sm text-white-50"></i> Export Excel</a>
         <?php } ?>
     </div>
 
@@ -11,8 +11,8 @@
             <div class="card">  
                 <div class="card-body">
                     <?php echo $this->session->flashdata('pesan') ?>
-                    <?php if($this->session->userdata('hak_akses') == 1){ ?>
-                        <a class="mb-2 mt-2 btn btn-sm btn-success" href="<?php echo base_url('admin/pinjaman/listAnggota') ?>"><i class="fas fa-plus"></i> Tambah Pinjaman</a>
+                    <?php if($is_can_create){ ?>
+                        <a class="mb-2 mt-2 btn btn-sm btn-success" href="<?php echo base_url('pinjaman/listAnggota') ?>"><i class="fas fa-plus"></i> Tambah Pinjaman</a>
                     <?php } ?>
                     <table class="table table-striped table-bordered" id="myTable" width="100%" cellspacing="0">
                         <thead>
@@ -44,11 +44,17 @@
                                 <?php } ?>
                                 <td>
                                     <center>
-                                        <?php if($this->session->userdata('hak_akses') == 1){ ?>
-                                            <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/pinjaman/updateData/'. $a->id) ?>"><i class="fas fa-edit"></i></a>
-                                            <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger" href="<?php echo base_url('admin/pinjaman/deleteData/'. $a->id) ?>"><i class="fas fa-trash"></i></a>
+                                        <?php if($is_can_edit){ ?>
+                                            <a class="btn btn-sm btn-primary" href="<?php echo base_url('pinjaman/updateData/'. $a->id) ?>"><i class="fas fa-edit"></i></a>
                                         <?php } ?>
-                                        <a class="btn btn-sm btn-success" href="<?php echo base_url('admin/pinjaman/detailAngsuran/'. $a->id) ?>">Detail Angsuran</a>
+
+                                        <?php if($is_can_delete){ ?>
+                                            <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger" href="<?php echo base_url('pinjaman/deleteData/'. $a->id) ?>"><i class="fas fa-trash"></i></a>
+                                        <?php } ?>
+
+                                        <?php if($is_can_read){ ?>
+                                            <a class="btn btn-sm btn-success" href="<?php echo base_url('pinjaman/detailAngsuran/'. $a->id) ?>">Detail Angsuran</a>
+                                        <?php } ?>
                                     </center>
                                 </td>
                             </tr>

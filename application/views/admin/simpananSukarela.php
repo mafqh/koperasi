@@ -5,7 +5,7 @@
             <h1 class="h3 mb-0 text-gray-800"><?php echo $title ?></h1>
         </div>
         <div class="col-md-4">
-            <?php if($this->session->userdata('hak_akses') == 1){ ?>
+            <?php if($is_can_export_excel){ ?>
                 <div class="row">
                     <div class="col-md-2 pt-1"><label>Tahun</label></div>
                     <div class="col-md-5">
@@ -19,7 +19,7 @@
                         </select>
                     </div>
                     <div class="col-md-5">
-                        <a href="<?php echo base_url('admin/SimpananSukarela/exportExcel/').date('Y'); ?>" class="btn btn-sm btn-success shadow-sm" id="btn-export-excel"><i class="fas fa-file-excel fa-sm text-white-50"></i> Export Excel</a>
+                        <a href="<?php echo base_url('SimpananSukarela/exportExcel/').date('Y'); ?>" class="btn btn-sm btn-success shadow-sm" id="btn-export-excel"><i class="fas fa-file-excel fa-sm text-white-50"></i> Export Excel</a>
                     </div>
                 </div>
             <?php } ?>
@@ -38,7 +38,7 @@
         
         <tbody>
             <?php $no=1;
-            $jenis_simpanan = $this->uri->segment(4);
+            $jenis_simpanan = $this->uri->segment(3);
             foreach($jenis as $a) : ?>
                 <tr>
                     <td><?php echo $no++ ?></td>
@@ -47,11 +47,14 @@
                     <td><?php echo "Rp " . number_format($a->total,0,',','.'); ?></td>
                     <td>
                         <center>
-                            <?php if($this->session->userdata('hak_akses') == 1){ ?>
-                            <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/simpananSukarela/tambahSimpananSukarela/'. $a->id_anggota) ?>"><i class="fas fa-plus"></i> Tabungan</a>
-                            <a class="btn btn-sm btn-danger" href="<?php echo base_url('admin/simpananSukarela/ambilSimpananSukarela/'. $a->id_anggota) ?>"><i class="fas fa-minus"></i> Tabungan</a>
+                            <?php if($is_can_create){ ?>
+                                <a class="btn btn-sm btn-primary" href="<?php echo base_url('simpananSukarela/tambahSimpananSukarela/'. $a->id_anggota) ?>"><i class="fas fa-plus"></i> Tabungan</a>
+                                <a class="btn btn-sm btn-danger" href="<?php echo base_url('simpananSukarela/ambilSimpananSukarela/'. $a->id_anggota) ?>"><i class="fas fa-minus"></i> Tabungan</a>
                             <?php } ?>
-                            <a class="btn btn-sm btn-success" href="<?php echo base_url('admin/simpananSukarela/detailSimpananSukarela/'. $a->id_anggota) ?>">Detail Simpanan Tabungan</a>
+                            
+                            <?php if($is_can_read){ ?>
+                                <a class="btn btn-sm btn-success" href="<?php echo base_url('simpananSukarela/detailSimpananSukarela/'. $a->id_anggota) ?>">Detail Simpanan Tabungan</a>
+                            <?php } ?>
                         </center>
                     </td>
     
@@ -70,7 +73,7 @@
 
     function changeTahun(e) {
         var tahun = $(e).val();
-        var url_excel = '<?php echo base_url('admin/SimpananSukarela/exportExcel/'); ?>' + tahun;
+        var url_excel = '<?php echo base_url('SimpananSukarela/exportExcel/'); ?>' + tahun;
         $("#btn-export-excel").attr("href", url_excel);
     }
 </script>

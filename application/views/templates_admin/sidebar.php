@@ -10,13 +10,17 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
             <!-- Nav Item - Dashboard -->
+
+            <?php if(in_array('dashboard', $akses_menu) || $is_superadmin){ ?>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url('admin/dashboard') ?>">
+                <a class="nav-link" href="<?php echo base_url('dashboard') ?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
-            <?php if($this->session->userdata('hak_akses') == 1){ ?>
+            <?php } ?>
+            
+            <?php if(in_array('master_data', $akses_menu) || $is_superadmin){ ?>
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
@@ -27,14 +31,23 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="<?php echo base_url('admin/dataJabatan') ?>">Data Jabatan</a>
-                        <a class="collapse-item" href="<?php echo base_url('admin/dataPengurus') ?>">Data Pengurus</a>
-                        <a class="collapse-item" href="<?php echo base_url('admin/dataAnggota') ?>">Data Anggota</a>
+                        <?php if(in_array('dataJabatan', $akses_menu) || $is_superadmin){ ?>
+                            <a class="collapse-item" href="<?php echo base_url('dataJabatan') ?>">Data Jabatan</a>
+                        <?php } ?>
+                        
+                        <?php if(in_array('dataPengurus', $akses_menu) || $is_superadmin){ ?>
+                            <a class="collapse-item" href="<?php echo base_url('dataPengurus') ?>">Data Pengurus</a>
+                        <?php } ?>
+
+                        <?php if(in_array('dataAnggota', $akses_menu) || $is_superadmin){ ?>
+                            <a class="collapse-item" href="<?php echo base_url('dataAnggota') ?>">Data Anggota</a>
+                        <?php } ?>
                     </div>
                 </div>
             </li>
             <?php } ?>
-
+            
+            <?php if(in_array('simpanan', $akses_menu) || $is_superadmin){ ?>
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
@@ -44,28 +57,39 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="<?php echo base_url('admin/simpananPokok/simpanan') ?>">Simpanan Pokok</a>
-                        <a class="collapse-item" href="<?php echo base_url('admin/simpananWajib/simpanan') ?>">Simpanan Wajib</a>
-                        <a class="collapse-item" href="<?php echo base_url('admin/simpananSukarela/simpanan') ?>">Simpanan Tabungan</a>
+                        <?php if(in_array('simpananPokok', $akses_menu) || $is_superadmin){ ?>
+                            <a class="collapse-item" href="<?php echo base_url('simpananPokok/simpanan') ?>">Simpanan Pokok</a>
+                        <?php } ?>
+                        <?php if(in_array('simpananWajib', $akses_menu) || $is_superadmin){ ?>
+                            <a class="collapse-item" href="<?php echo base_url('simpananWajib/simpanan') ?>">Simpanan Wajib</a>
+                        <?php } ?>
+                        <?php if(in_array('simpananSukarela', $akses_menu) || $is_superadmin){ ?>
+                            <a class="collapse-item" href="<?php echo base_url('simpananSukarela/simpanan') ?>">Simpanan Tabungan</a>
+                        <?php } ?>
                     </div>
                 </div>
             </li>
+            <?php } ?>
 
+            <?php if(in_array('pinjaman', $akses_menu) || $is_superadmin){ ?>
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url('admin/pinjaman') ?>">
+                <a class="nav-link" href="<?php echo base_url('pinjaman') ?>">
                     <i class="fas fa-fw fa-money-check-alt"></i>
                     <span>Pinjaman</span>
                 </a>
             </li>
-
+            <?php } ?>
+            
+            <?php if(in_array('gantiPassword', $akses_menu) || $is_superadmin){ ?>
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url('admin/gantiPassword') ?>">
+                <a class="nav-link" href="<?php echo base_url('gantiPassword') ?>">
                     <i class="fas fa-fw fa-lock"></i>
                     <span>Ubah Password</span>
                 </a>
             </li>
+            <?php } ?>
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">

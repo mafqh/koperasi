@@ -3,8 +3,8 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800"><?php echo $title ?></h1>
-        <?php if( $this->session->userdata('hak_akses') == 1){ ?>
-            <a href="<?php echo base_url('admin/SimpananPokok/exportExcel'); ?>" class="btn btn-sm btn-success shadow-sm" id="btn-export-excel"><i class="fas fa-file-excel fa-sm text-white-50"></i> Export Excel</a>
+        <?php if($is_can_export_excel){ ?>
+            <a href="<?php echo base_url('SimpananPokok/exportExcel'); ?>" class="btn btn-sm btn-success shadow-sm" id="btn-export-excel"><i class="fas fa-file-excel fa-sm text-white-50"></i> Export Excel</a>
         <?php } ?>
     </div>
 
@@ -21,7 +21,7 @@
         
         <tbody>
             <?php $no=1;
-            $jenis_simpanan = $this->uri->segment(4);
+            $jenis_simpanan = $this->uri->segment(3);
             foreach($jenis as $a) : ?>
                 <tr>
                     <td><?php echo $no++ ?></td>
@@ -42,12 +42,12 @@
                         <td><span class="badge badge-danger px-4 py-2">Belum Lunas</span></td>
                     <?php } ?>
                     <td>
-                        <?php if($status == "belum lunas" && $this->session->userdata('hak_akses') == 1){ ?>
-                            <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/simpananPokok/tambahSimpananPokok/'. $a->id_anggota) ?>"><i class="fas fa-plus"></i> Simpanan Pokok</a>
+                        <?php if($status == "belum lunas" && $is_can_create){ ?>
+                            <a class="btn btn-sm btn-primary" href="<?php echo base_url('simpananPokok/tambahSimpananPokok/'. $a->id_anggota) ?>"><i class="fas fa-plus"></i> Simpanan Pokok</a>
                         <?php } ?>
                             
-                        <?php if($piutang != 200000){ ?>
-                            <a class="btn btn-sm btn-success" href="<?php echo base_url('admin/simpananPokok/detailSimpananPokok/'. $a->id_anggota) ?>">Detail Simpanan Pokok</a>
+                        <?php if($piutang != 200000 && $is_can_read){ ?>
+                            <a class="btn btn-sm btn-success" href="<?php echo base_url('simpananPokok/detailSimpananPokok/'. $a->id_anggota) ?>">Detail Simpanan Pokok</a>
                         <?php } ?>
                     </td>
     

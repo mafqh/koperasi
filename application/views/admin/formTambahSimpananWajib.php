@@ -7,9 +7,9 @@
 
     <div class="card" style="width: 50%">
         <div class="card-body">
-            <form method="POST" action="<?php echo base_url('admin/SimpananWajib/Tambah') ?>">
+            <form method="POST" action="<?php echo base_url('SimpananWajib/Tambah') ?>">
 
-            <?php $anggota = $this->uri->segment(4); ?>
+            <?php $anggota = $this->uri->segment(3); ?>
             <div class="form-group">
                 <label>Jumlah</label>
                 <input type="hidden" name="anggota" value="<?= $anggota ?> " >

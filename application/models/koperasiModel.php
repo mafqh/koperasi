@@ -235,6 +235,23 @@ class KoperasiModel extends CI_model{
         $this->db->group_by('data_pinjaman.id');
         return $this->db->get()->result();
     }
+
+    public function getAksesMenu($id_jabatan)
+    {
+        $this->db->select('menu')->from('hak_akses');
+        $this->db->where('id_jabatan', $id_jabatan);
+        $this->db->group_by('menu');
+        return $this->db->get()->result();
+    }
+
+    public function getOneAksesMenu($id_jabatan)
+    {
+        $this->db->select('menu')->from('hak_akses');
+        $this->db->where('id_jabatan', $id_jabatan);
+        $this->db->group_by('menu');
+        $this->db->order_by('id', 'asc');
+        return $this->db->get()->row();
+    }
 }
 
 ?>

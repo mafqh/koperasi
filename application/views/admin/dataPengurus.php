@@ -10,8 +10,9 @@
             <div class="card">
                 <div class="card-body">
                     <?php echo $this->session->flashdata('pesan') ?>
-                    <a class="mb-2 mt-2 btn btn-sm btn-success" href="<?php echo base_url('admin/dataPengurus/tambahData') ?>"><i class="fas fa-plus"></i> Tambah Pengurus</a>
-                
+                    <?php if($is_can_create){ ?>
+                        <a class="mb-2 mt-2 btn btn-sm btn-success" href="<?php echo base_url('dataPengurus/tambahData') ?>"><i class="fas fa-plus"></i> Tambah Pengurus</a>
+                    <?php } ?>
                     <table class="table table-striped table-bordered" id="myTable">
                         <thead>
                             <th class="text-centre">No</th>
@@ -56,11 +57,17 @@
                                     
                                     <td>
                                         <center>
-                                            <a class="btn btn-sm btn-primary" href="<?php echo base_url('admin/dataPengurus/updateData/'. $p->id_anggota) ?>"><i class="fas fa-edit"></i></a>
-                    
-                                            <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger" href="<?php echo base_url('admin/dataPengurus/deleteData/'. $p->id_anggota) ?>"><i class="fas fa-trash"></i></a>
-                    
-                                            <a class="btn btn-sm btn-success" href="<?php echo base_url('admin/dataPengurus/detailPengurus/'. $p->id_anggota) ?>"><i class="fas fa-eye"></i></a>
+                                            <?php if($is_can_edit){ ?>
+                                                <a class="btn btn-sm btn-primary" href="<?php echo base_url('dataPengurus/updateData/'. $p->id_anggota) ?>"><i class="fas fa-edit"></i></a>
+                                            <?php } ?>
+                                                
+                                            <?php if($is_can_delete){ ?>
+                                                <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger" href="<?php echo base_url('dataPengurus/deleteData/'. $p->id_anggota) ?>"><i class="fas fa-trash"></i></a>
+                                            <?php } ?>
+                                            
+                                            <?php if($is_can_read){ ?>
+                                                <a class="btn btn-sm btn-success" href="<?php echo base_url('dataPengurus/detailPengurus/'. $p->id_anggota) ?>"><i class="fas fa-eye"></i></a>
+                                            <?php } ?>
                                         </center>
                                     </td>
                     
