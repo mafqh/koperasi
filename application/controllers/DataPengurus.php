@@ -11,7 +11,7 @@ class DataPengurus extends Admin_Controller {
     {
         if($this->data['is_can_read']){
             $this->data['title'] = "Data Pengurus";
-            $this->data['pengurus'] = $this->db->get_where('data_anggota',['hak_akses'=>1])->result();
+            $this->data['pengurus'] = $this->db->get_where('data_anggota',['hak_akses'=>1, 'status !=' => 1])->result();
             $this->load->view('templates_admin/header', $this->data);
             $this->load->view('templates_admin/sidebar', $this->data);
             $this->load->view('admin/dataPengurus', $this->data);

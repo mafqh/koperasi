@@ -28,15 +28,15 @@
                             <?php $no=1; foreach($pengurus as $p) : ?>
                                 <?php 
                                 $jabatan = '';
-                                if($p->status==1){
+                                if($p->status==2){
                                     $jabatan = 'Ketua';
-                                }else if($p->status==2){
-                                     $jabatan = 'Sekretaris';
                                 }else if($p->status==3){
-                                     $jabatan = 'Bendahara';
+                                     $jabatan = 'Sekretaris';
                                 }else if($p->status==4){
-                                     $jabatan = 'Anggota Internal';
+                                     $jabatan = 'Bendahara';
                                 }else if($p->status==5){
+                                     $jabatan = 'Anggota Internal';
+                                }else if($p->status==6){
                                      $jabatan = 'Anggota Eksternal';
                                 }
                             

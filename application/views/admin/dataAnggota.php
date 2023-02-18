@@ -30,15 +30,15 @@
                         <?php $no=1; foreach($anggota as $a) : ?>
                             <?php 
                             $jabatan = '';
-                            if($a->status==1){
+                            if($a->status==2){
                                 $jabatan = 'Ketua';
-                            }else if($a->status==2){
-                                 $jabatan = 'Sekretaris';
                             }else if($a->status==3){
-                                 $jabatan = 'Bendahara';
+                                 $jabatan = 'Sekretaris';
                             }else if($a->status==4){
-                                 $jabatan = 'Anggota Internal';
+                                 $jabatan = 'Bendahara';
                             }else if($a->status==5){
+                                 $jabatan = 'Anggota Internal';
+                            }else if($a->status==6){
                                  $jabatan = 'Anggota Eksternal';
                             }
                         

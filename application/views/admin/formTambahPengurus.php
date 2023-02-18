@@ -58,9 +58,9 @@
                     <label>Jabatan</label>
                     <select name="status" class="form-control">
                         <option value="">--Pilih Jabatan--</option>
-                        <option value="1">Ketua</option>
-                        <option value="2">Sekertaris</option>
-                        <option value="3">Bendahara</option>
+                        <option value="2">Ketua</option>
+                        <option value="3">Sekertaris</option>
+                        <option value="4">Bendahara</option>
                     </select>
                     <?php echo form_error('status', '<div class="text-small text-danger"> </div>') ?>
                 </div>
