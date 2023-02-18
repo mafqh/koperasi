@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Feb 2023 pada 05.17
+-- Waktu pembuatan: 18 Feb 2023 pada 12.06
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 7.4.33
 
@@ -79,12 +79,12 @@ CREATE TABLE `data_anggota` (
 --
 
 INSERT INTO `data_anggota` (`id_anggota`, `nik`, `nama_anggota`, `alamat_anggota`, `no_telp`, `jenis_kelamin`, `status`, `tanggal_masuk`, `photo`, `hak_akses`, `username`, `password`) VALUES
-(1, '123', 'Ujang Bustomi', 'Komplek Pertanian Loji, Kel. Loji, Kec. Bogor Barat, Kota Bogor', '01283123', 'Laki-laki', '4', '2022-08-02', 'img_avatar31.png', 2, 'Ujang', '202cb962ac59075b964b07152d234b70'),
-(3, '123', 'Hendi', 'Kota Bogorrrrrrrr', '021xxx', 'Laki-laki', '4', '2022-08-01', 'img_avatar13.png', 2, 'hendi', '202cb962ac59075b964b07152d234b70'),
-(4, '123', 'Dodi', 'Kota Bogorrrrrrrr', '021xxxx', 'Laki-laki', '4', '2022-08-08', 'img_avatar32.png', 2, 'dodi', '202cb962ac59075b964b07152d234b70'),
-(16, '01', 'Dini', 'Komplek Pertanian Loji, Kel. Loji, Kec. Bogor Barat, Kota Bogor', '021xxx', 'Perempuan', '1', '2022-08-28', 'img_avatar26.png', 1, 'dini', '202cb962ac59075b964b07152d234b70'),
-(17, '08182828', 'Tes', 'tes', '08283882', 'Laki-laki', '1', '2022-10-22', 'dummy-user.png', 1, 'tes', '25d55ad283aa400af464c76d713c07ad'),
-(18, '12313123', 'asdsad', 'asdadsadas', '12313123213', 'Laki-laki', '4', '2022-10-22', 'dummy-user1.png', 2, 'asdasd', 'ec02c59dee6faaca3189bace969c22d3');
+(1, '123', 'Ujang Bustomi', 'Komplek Pertanian Loji, Kel. Loji, Kec. Bogor Barat, Kota Bogor', '01283123', 'Laki-laki', '5', '2022-08-02', 'img_avatar31.png', 2, 'Ujang', '202cb962ac59075b964b07152d234b70'),
+(3, '123', 'Hendi', 'Kota Bogorrrrrrrr', '021xxx', 'Laki-laki', '5', '2022-08-01', 'img_avatar13.png', 2, 'hendi', '202cb962ac59075b964b07152d234b70'),
+(4, '123', 'Dodi', 'Kota Bogorrrrrrrr', '021xxxx', 'Laki-laki', '5', '2022-08-08', 'img_avatar32.png', 2, 'dodi', '202cb962ac59075b964b07152d234b70'),
+(16, '01', 'Dini', 'Komplek Pertanian Loji, Kel. Loji, Kec. Bogor Barat, Kota Bogor', '021xxx', 'Perempuan', '2', '2022-08-28', 'img_avatar26.png', 1, 'dini', '202cb962ac59075b964b07152d234b70'),
+(18, '12313123', 'asdsad', 'asdadsadas', '12313123213', 'Laki-laki', '5', '2022-10-22', 'dummy-user1.png', 2, 'asdasd', 'ec02c59dee6faaca3189bace969c22d3'),
+(19, 'superadmin', 'Superadmin', '', '', 'Laki-Laki', '1', '2022-08-28', 'img_avatar26.png', 1, 'superadmin', '202cb962ac59075b964b07152d234b70');
 
 -- --------------------------------------------------------
 
@@ -132,8 +132,7 @@ INSERT INTO `data_jabatan` (`id_jabatan`, `nama_jabatan`, `is_pengurus`) VALUES
 (3, 'Sekretaris', 1),
 (4, 'Bendahara', 0),
 (5, 'Anggota Internal', 0),
-(6, 'Anggota Eksternal', 0),
-(7, 'Tes', 0);
+(6, 'Anggota Eksternal', 0);
 
 -- --------------------------------------------------------
 
@@ -175,6 +174,101 @@ CREATE TABLE `hak_akses` (
   `menu` varchar(225) NOT NULL,
   `fungsi` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `hak_akses`
+--
+
+INSERT INTO `hak_akses` (`id`, `id_jabatan`, `menu`, `fungsi`) VALUES
+(1072, 2, 'dashboard', 1),
+(1073, 2, 'dataJabatan', 1),
+(1074, 2, 'dataJabatan', 7),
+(1075, 2, 'dataPengurus', 1),
+(1076, 2, 'dataPengurus', 2),
+(1077, 2, 'dataPengurus', 3),
+(1078, 2, 'dataPengurus', 4),
+(1079, 2, 'dataAnggota', 1),
+(1080, 2, 'dataAnggota', 2),
+(1081, 2, 'dataAnggota', 3),
+(1082, 2, 'dataAnggota', 4),
+(1083, 2, 'dataAnggota', 6),
+(1084, 2, 'simpananPokok', 1),
+(1085, 2, 'simpananPokok', 2),
+(1086, 2, 'simpananPokok', 3),
+(1087, 2, 'simpananPokok', 4),
+(1088, 2, 'simpananPokok', 5),
+(1089, 2, 'simpananPokok', 6),
+(1090, 2, 'simpananWajib', 1),
+(1091, 2, 'simpananWajib', 2),
+(1092, 2, 'simpananWajib', 3),
+(1093, 2, 'simpananWajib', 4),
+(1094, 2, 'simpananWajib', 5),
+(1095, 2, 'simpananWajib', 6),
+(1096, 2, 'simpananSukarela', 1),
+(1097, 2, 'simpananSukarela', 2),
+(1098, 2, 'simpananSukarela', 3),
+(1099, 2, 'simpananSukarela', 4),
+(1100, 2, 'simpananSukarela', 5),
+(1101, 2, 'simpananSukarela', 6),
+(1102, 2, 'pinjaman', 1),
+(1103, 2, 'pinjaman', 2),
+(1104, 2, 'pinjaman', 3),
+(1105, 2, 'pinjaman', 4),
+(1106, 2, 'pinjaman', 5),
+(1107, 2, 'pinjaman', 6),
+(1108, 2, 'gantiPassword', 1),
+(1109, 5, 'dashboard', 1),
+(1110, 5, 'simpananPokok', 1),
+(1111, 5, 'simpananPokok', 2),
+(1112, 5, 'simpananPokok', 3),
+(1113, 5, 'simpananPokok', 4),
+(1114, 5, 'simpananPokok', 5),
+(1115, 5, 'simpananPokok', 6),
+(1116, 5, 'simpananWajib', 1),
+(1117, 5, 'simpananWajib', 2),
+(1118, 5, 'simpananWajib', 3),
+(1119, 5, 'simpananWajib', 4),
+(1120, 5, 'simpananWajib', 5),
+(1121, 5, 'simpananWajib', 6),
+(1122, 5, 'simpananSukarela', 1),
+(1123, 5, 'simpananSukarela', 2),
+(1124, 5, 'simpananSukarela', 3),
+(1125, 5, 'simpananSukarela', 4),
+(1126, 5, 'simpananSukarela', 5),
+(1127, 5, 'simpananSukarela', 6),
+(1128, 5, 'pinjaman', 1),
+(1129, 5, 'pinjaman', 2),
+(1130, 5, 'pinjaman', 3),
+(1131, 5, 'pinjaman', 4),
+(1132, 5, 'pinjaman', 5),
+(1133, 5, 'pinjaman', 6),
+(1134, 5, 'gantiPassword', 1),
+(1135, 6, 'dashboard', 1),
+(1136, 6, 'simpananPokok', 1),
+(1137, 6, 'simpananPokok', 2),
+(1138, 6, 'simpananPokok', 3),
+(1139, 6, 'simpananPokok', 4),
+(1140, 6, 'simpananPokok', 5),
+(1141, 6, 'simpananPokok', 6),
+(1142, 6, 'simpananWajib', 1),
+(1143, 6, 'simpananWajib', 2),
+(1144, 6, 'simpananWajib', 3),
+(1145, 6, 'simpananWajib', 4),
+(1146, 6, 'simpananWajib', 5),
+(1147, 6, 'simpananWajib', 6),
+(1148, 6, 'simpananSukarela', 1),
+(1149, 6, 'simpananSukarela', 2),
+(1150, 6, 'simpananSukarela', 3),
+(1151, 6, 'simpananSukarela', 4),
+(1152, 6, 'simpananSukarela', 5),
+(1153, 6, 'simpananSukarela', 6),
+(1154, 6, 'pinjaman', 1),
+(1155, 6, 'pinjaman', 2),
+(1156, 6, 'pinjaman', 3),
+(1157, 6, 'pinjaman', 4),
+(1158, 6, 'pinjaman', 5),
+(1159, 6, 'pinjaman', 6),
+(1160, 6, 'gantiPassword', 1);
 
 -- --------------------------------------------------------
 
@@ -294,7 +388,7 @@ ALTER TABLE `biaya_administrasi`
 -- AUTO_INCREMENT untuk tabel `data_anggota`
 --
 ALTER TABLE `data_anggota`
-  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT untuk tabel `data_angsuran`
@@ -318,7 +412,7 @@ ALTER TABLE `data_pinjaman`
 -- AUTO_INCREMENT untuk tabel `hak_akses`
 --
 ALTER TABLE `hak_akses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1161;
 
 --
 -- AUTO_INCREMENT untuk tabel `simpanan_tabungan`
