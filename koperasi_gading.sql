@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 18 Feb 2023 pada 14.18
--- Versi server: 10.4.27-MariaDB
--- Versi PHP: 7.4.33
+-- Generation Time: Apr 07, 2023 at 04:21 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `biaya_administrasi`
+-- Table structure for table `biaya_administrasi`
 --
 
 CREATE TABLE `biaya_administrasi` (
@@ -33,10 +33,10 @@ CREATE TABLE `biaya_administrasi` (
   `tanggal` date NOT NULL,
   `jumlah` int(11) NOT NULL,
   `status` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `biaya_administrasi`
+-- Dumping data for table `biaya_administrasi`
 --
 
 INSERT INTO `biaya_administrasi` (`id_biaya_administrasi`, `id_anggota`, `tanggal`, `jumlah`, `status`) VALUES
@@ -46,17 +46,16 @@ INSERT INTO `biaya_administrasi` (`id_biaya_administrasi`, `id_anggota`, `tangga
 (13, 1, '2022-09-08', 6000, 0),
 (15, 4, '2022-09-17', 21000, 1),
 (16, 1, '2022-09-19', 2000, 1),
-(17, 1, '2022-10-03', 20000, 1),
-(18, 1, '2022-10-10', 200000, 1),
-(19, 1, '2022-10-10', 2000000, 1),
 (21, 18, '2022-10-24', 15000, 1),
 (22, 17, '2022-10-24', 20000, 1),
-(23, 18, '2022-10-24', 5000, 1);
+(23, 18, '2022-10-24', 5000, 1),
+(24, 1, '2023-04-04', 100000, 1),
+(25, 1, '2023-04-04', 77000, 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `data_anggota`
+-- Table structure for table `data_anggota`
 --
 
 CREATE TABLE `data_anggota` (
@@ -72,24 +71,30 @@ CREATE TABLE `data_anggota` (
   `hak_akses` int(11) NOT NULL,
   `username` varchar(120) NOT NULL,
   `password` varchar(32) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `data_anggota`
+-- Dumping data for table `data_anggota`
 --
 
 INSERT INTO `data_anggota` (`id_anggota`, `nik`, `nama_anggota`, `alamat_anggota`, `no_telp`, `jenis_kelamin`, `status`, `tanggal_masuk`, `photo`, `hak_akses`, `username`, `password`) VALUES
-(1, '123', 'Ujang Bustomi', 'Komplek Pertanian Loji, Kel. Loji, Kec. Bogor Barat, Kota Bogor', '01283123', 'Laki-laki', '5', '2022-08-02', 'img_avatar31.png', 2, 'Ujang', '202cb962ac59075b964b07152d234b70'),
-(3, '123', 'Hendi', 'Kota Bogorrrrrrrr', '021xxx', 'Laki-laki', '5', '2022-08-01', 'img_avatar13.png', 2, 'hendi', '202cb962ac59075b964b07152d234b70'),
-(4, '123', 'Dodi', 'Kota Bogorrrrrrrr', '021xxxx', 'Laki-laki', '5', '2022-08-08', 'img_avatar32.png', 2, 'dodi', '202cb962ac59075b964b07152d234b70'),
+(1, '04', 'Ujang Bustomi', 'Komplek Pertanian Loji, Kel. Loji, Kec. Bogor Barat, Kota Bogor', '01283123', 'Laki-laki', '6', '2022-08-02', 'img_avatar31.png', 2, 'Ujang', '202cb962ac59075b964b07152d234b70'),
+(3, '05', 'Hendi', 'Perumahan Bogor Gading Residence', '021xxx', 'Laki-laki', '5', '2022-08-01', 'img_avatar13.png', 2, 'hendi', '202cb962ac59075b964b07152d234b70'),
+(4, '06', 'Dodi', 'Perumahan Bogor Gading Residence', '021xxxx', 'Laki-laki', '5', '2022-08-08', 'img_avatar32.png', 2, 'dodi', '202cb962ac59075b964b07152d234b70'),
 (16, '01', 'Dini', 'Komplek Pertanian Loji, Kel. Loji, Kec. Bogor Barat, Kota Bogor', '021xxx', 'Perempuan', '2', '2022-08-28', 'img_avatar26.png', 1, 'dini', '202cb962ac59075b964b07152d234b70'),
-(18, '12313123', 'asdsad', 'asdadsadas', '12313123213', 'Laki-laki', '6', '2022-10-22', 'dummy-user1.png', 2, 'asdasd', 'ec02c59dee6faaca3189bace969c22d3'),
-(19, 'superadmin', 'Superadmin', '', '', 'Laki-Laki', '1', '2022-08-28', 'img_avatar26.png', 1, 'superadmin', '202cb962ac59075b964b07152d234b70');
+(18, '07', 'Putu', 'Kota Bogor', '021xxxxxx', 'Laki-laki', '6', '2022-10-22', 'img_avatar191.png', 2, 'putu', 'ec02c59dee6faaca3189bace969c22d3'),
+(19, 'superadmin', 'Superadmin', '', '', 'Laki-Laki', '1', '2022-08-28', 'img_avatar26.png', 1, 'superadmin', '202cb962ac59075b964b07152d234b70'),
+(20, '08', 'Lui', 'Perumahan Bogor Gading Residence', '021xxx', 'Perempuan', '5', '2023-02-22', 'img_avatar215.png', 2, 'lui', '202cb962ac59075b964b07152d234b70'),
+(21, '09', 'Hany', 'Perumahan Bogor Gading Residence', '021xxx', 'Perempuan', '5', '2023-02-22', 'img_avatar216.png', 2, 'hany', '202cb962ac59075b964b07152d234b70'),
+(22, '10', 'Murni', 'Perumahan Bogor Gading Residence', '021xxx', 'Perempuan', '5', '2023-02-22', 'img_avatar28.png', 2, 'murni', '202cb962ac59075b964b07152d234b70'),
+(23, '02', 'Indra', 'Perumahan Bogor Gading Residence', '021xxx', 'Laki-laki', '3', '2023-02-22', 'dodi.png', 1, 'indra', '202cb962ac59075b964b07152d234b70'),
+(24, '03', 'Henny', 'Perumahan Bogor Gading Residence', '021xxx', 'Perempuan', '4', '2023-02-22', 'img_avatar217.png', 1, 'henny', '202cb962ac59075b964b07152d234b70'),
+(25, '10', 'faqih', 'Kota Bogor', '08xxxxx', 'Laki-laki', '5', '2023-04-05', '', 2, 'faqih', '202cb962ac59075b964b07152d234b70');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `data_angsuran`
+-- Table structure for table `data_angsuran`
 --
 
 CREATE TABLE `data_angsuran` (
@@ -98,32 +103,29 @@ CREATE TABLE `data_angsuran` (
   `no_angsuran` varchar(50) NOT NULL,
   `jumlah_angsuran` int(11) NOT NULL,
   `tanggal_bayar` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `data_angsuran`
+-- Dumping data for table `data_angsuran`
 --
 
 INSERT INTO `data_angsuran` (`id`, `id_pinjaman`, `no_angsuran`, `jumlah_angsuran`, `tanggal_bayar`) VALUES
-(3, 5, '132131222', 3000000, '2022-10-14'),
-(5, 5, 'A2301025002', 1000, '2023-01-02'),
-(6, 4, 'A2301104001', 10000, '2023-01-10'),
-(7, 9, 'A2301139001', 1000000, '2023-01-13');
+(8, 10, 'A23022310001', 50000, '2023-02-23');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `data_jabatan`
+-- Table structure for table `data_jabatan`
 --
 
 CREATE TABLE `data_jabatan` (
   `id_jabatan` int(11) NOT NULL,
   `nama_jabatan` varchar(120) NOT NULL,
   `is_pengurus` tinyint(4) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `data_jabatan`
+-- Dumping data for table `data_jabatan`
 --
 
 INSERT INTO `data_jabatan` (`id_jabatan`, `nama_jabatan`, `is_pengurus`) VALUES
@@ -137,7 +139,7 @@ INSERT INTO `data_jabatan` (`id_jabatan`, `nama_jabatan`, `is_pengurus`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `data_pinjaman`
+-- Table structure for table `data_pinjaman`
 --
 
 CREATE TABLE `data_pinjaman` (
@@ -148,24 +150,19 @@ CREATE TABLE `data_pinjaman` (
   `tanggal_pinjaman` date NOT NULL,
   `lama` int(11) NOT NULL,
   `status` enum('lunas','belum lunas') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `data_pinjaman`
+-- Dumping data for table `data_pinjaman`
 --
 
 INSERT INTO `data_pinjaman` (`id`, `id_anggota`, `no_pinjaman`, `jumlah_pinjaman`, `tanggal_pinjaman`, `lama`, `status`) VALUES
-(4, 1, '123456789', 2000000, '2022-10-13', 12, 'belum lunas'),
-(5, 4, '3213123123', 2000000, '2022-10-14', 12, 'lunas'),
-(6, 1, 'P20221230', 5000000, '2022-12-30', 12, 'belum lunas'),
-(7, 1, 'P202212300004', 3500000, '2022-12-30', 15, 'belum lunas'),
-(8, 1, 'P202212301004', 55000, '2022-12-30', 15, 'belum lunas'),
-(9, 1, 'P2301131005', 24000000, '2023-01-13', 24, 'belum lunas');
+(10, 1, 'P2302231001', 150000, '2023-02-23', 3, 'belum lunas');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `hak_akses`
+-- Table structure for table `hak_akses`
 --
 
 CREATE TABLE `hak_akses` (
@@ -173,10 +170,10 @@ CREATE TABLE `hak_akses` (
   `id_jabatan` int(11) NOT NULL,
   `menu` varchar(225) NOT NULL,
   `fungsi` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `hak_akses`
+-- Dumping data for table `hak_akses`
 --
 
 INSERT INTO `hak_akses` (`id`, `id_jabatan`, `menu`, `fungsi`) VALUES
@@ -217,10 +214,6 @@ INSERT INTO `hak_akses` (`id`, `id_jabatan`, `menu`, `fungsi`) VALUES
 (1218, 2, 'pinjaman', 5),
 (1219, 2, 'pinjaman', 6),
 (1220, 2, 'gantiPassword', 1),
-(1221, 3, 'dashboard', 1),
-(1222, 3, 'gantiPassword', 1),
-(1223, 4, 'dashboard', 1),
-(1224, 4, 'gantiPassword', 1),
 (1225, 5, 'dashboard', 1),
 (1226, 5, 'simpananPokok', 1),
 (1227, 5, 'simpananPokok', 6),
@@ -240,12 +233,49 @@ INSERT INTO `hak_akses` (`id`, `id_jabatan`, `menu`, `fungsi`) VALUES
 (1241, 6, 'simpananSukarela', 6),
 (1242, 6, 'pinjaman', 1),
 (1243, 6, 'pinjaman', 6),
-(1244, 6, 'gantiPassword', 1);
+(1244, 6, 'gantiPassword', 1),
+(1245, 3, 'dashboard', 1),
+(1246, 3, 'dataPengurus', 1),
+(1247, 3, 'dataPengurus', 2),
+(1248, 3, 'dataPengurus', 3),
+(1249, 3, 'dataPengurus', 4),
+(1250, 3, 'dataAnggota', 1),
+(1251, 3, 'dataAnggota', 2),
+(1252, 3, 'dataAnggota', 3),
+(1253, 3, 'dataAnggota', 4),
+(1254, 3, 'dataAnggota', 6),
+(1255, 3, 'gantiPassword', 1),
+(1256, 4, 'dashboard', 1),
+(1257, 4, 'simpananPokok', 1),
+(1258, 4, 'simpananPokok', 2),
+(1259, 4, 'simpananPokok', 3),
+(1260, 4, 'simpananPokok', 4),
+(1261, 4, 'simpananPokok', 5),
+(1262, 4, 'simpananPokok', 6),
+(1263, 4, 'simpananWajib', 1),
+(1264, 4, 'simpananWajib', 2),
+(1265, 4, 'simpananWajib', 3),
+(1266, 4, 'simpananWajib', 4),
+(1267, 4, 'simpananWajib', 5),
+(1268, 4, 'simpananWajib', 6),
+(1269, 4, 'simpananSukarela', 1),
+(1270, 4, 'simpananSukarela', 2),
+(1271, 4, 'simpananSukarela', 3),
+(1272, 4, 'simpananSukarela', 4),
+(1273, 4, 'simpananSukarela', 5),
+(1274, 4, 'simpananSukarela', 6),
+(1275, 4, 'pinjaman', 1),
+(1276, 4, 'pinjaman', 2),
+(1277, 4, 'pinjaman', 3),
+(1278, 4, 'pinjaman', 4),
+(1279, 4, 'pinjaman', 5),
+(1280, 4, 'pinjaman', 6),
+(1281, 4, 'gantiPassword', 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `simpanan_tabungan`
+-- Table structure for table `simpanan_tabungan`
 --
 
 CREATE TABLE `simpanan_tabungan` (
@@ -254,25 +284,32 @@ CREATE TABLE `simpanan_tabungan` (
   `tanggal` date NOT NULL,
   `jumlah` int(11) NOT NULL,
   `jenis_simpanan` enum('pemasukan','pengeluaran') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `simpanan_tabungan`
+-- Dumping data for table `simpanan_tabungan`
 --
 
 INSERT INTO `simpanan_tabungan` (`id_simpanan_tabungan`, `id_anggota`, `tanggal`, `jumlah`, `jenis_simpanan`) VALUES
-(12, 1, '2022-12-28', 400000, 'pemasukan'),
+(12, 1, '2023-04-05', 400000, 'pemasukan'),
 (13, 1, '2022-12-28', 200000, 'pengeluaran'),
 (14, 3, '2022-12-28', 500000, 'pemasukan'),
 (15, 3, '2022-12-28', 500000, 'pemasukan'),
 (16, 3, '2022-12-28', 200000, 'pengeluaran'),
 (17, 1, '2022-12-28', 10000, 'pengeluaran'),
-(18, 1, '2022-12-28', 50000, 'pemasukan');
+(18, 1, '2022-12-28', 50000, 'pemasukan'),
+(19, 4, '2023-03-18', 200000, 'pemasukan'),
+(20, 23, '2023-03-18', 300000, 'pemasukan'),
+(21, 22, '2023-03-18', 150000, 'pemasukan'),
+(22, 21, '2023-03-18', 50000, 'pemasukan'),
+(23, 20, '2023-03-18', 100000, 'pemasukan'),
+(24, 18, '2023-03-18', 200000, 'pemasukan'),
+(25, 16, '2023-03-18', 100000, 'pemasukan');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `simpanan_wajib`
+-- Table structure for table `simpanan_wajib`
 --
 
 CREATE TABLE `simpanan_wajib` (
@@ -281,119 +318,118 @@ CREATE TABLE `simpanan_wajib` (
   `tanggal` date NOT NULL,
   `jumlah` int(11) NOT NULL,
   `status` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `simpanan_wajib`
+-- Dumping data for table `simpanan_wajib`
 --
 
 INSERT INTO `simpanan_wajib` (`id_simpanan_wajib`, `id_anggota`, `tanggal`, `jumlah`, `status`) VALUES
 (1, 1, '2022-10-10', 20000, 1),
 (2, 0, '2022-10-29', 0, 1),
 (3, 0, '2022-10-29', 180000, 1),
-(4, 1, '2022-10-29', 180000, 1),
-(6, 1, '2023-02-04', 0, 1);
+(4, 1, '2022-10-29', 180000, 1);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `biaya_administrasi`
+-- Indexes for table `biaya_administrasi`
 --
 ALTER TABLE `biaya_administrasi`
   ADD PRIMARY KEY (`id_biaya_administrasi`);
 
 --
--- Indeks untuk tabel `data_anggota`
+-- Indexes for table `data_anggota`
 --
 ALTER TABLE `data_anggota`
   ADD PRIMARY KEY (`id_anggota`);
 
 --
--- Indeks untuk tabel `data_angsuran`
+-- Indexes for table `data_angsuran`
 --
 ALTER TABLE `data_angsuran`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `data_jabatan`
+-- Indexes for table `data_jabatan`
 --
 ALTER TABLE `data_jabatan`
   ADD PRIMARY KEY (`id_jabatan`);
 
 --
--- Indeks untuk tabel `data_pinjaman`
+-- Indexes for table `data_pinjaman`
 --
 ALTER TABLE `data_pinjaman`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `hak_akses`
+-- Indexes for table `hak_akses`
 --
 ALTER TABLE `hak_akses`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `simpanan_tabungan`
+-- Indexes for table `simpanan_tabungan`
 --
 ALTER TABLE `simpanan_tabungan`
   ADD PRIMARY KEY (`id_simpanan_tabungan`);
 
 --
--- Indeks untuk tabel `simpanan_wajib`
+-- Indexes for table `simpanan_wajib`
 --
 ALTER TABLE `simpanan_wajib`
   ADD PRIMARY KEY (`id_simpanan_wajib`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `biaya_administrasi`
+-- AUTO_INCREMENT for table `biaya_administrasi`
 --
 ALTER TABLE `biaya_administrasi`
-  MODIFY `id_biaya_administrasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_biaya_administrasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT untuk tabel `data_anggota`
+-- AUTO_INCREMENT for table `data_anggota`
 --
 ALTER TABLE `data_anggota`
-  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT untuk tabel `data_angsuran`
+-- AUTO_INCREMENT for table `data_angsuran`
 --
 ALTER TABLE `data_angsuran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT untuk tabel `data_jabatan`
+-- AUTO_INCREMENT for table `data_jabatan`
 --
 ALTER TABLE `data_jabatan`
   MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT untuk tabel `data_pinjaman`
+-- AUTO_INCREMENT for table `data_pinjaman`
 --
 ALTER TABLE `data_pinjaman`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `hak_akses`
+-- AUTO_INCREMENT for table `hak_akses`
 --
 ALTER TABLE `hak_akses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1245;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1282;
 
 --
--- AUTO_INCREMENT untuk tabel `simpanan_tabungan`
+-- AUTO_INCREMENT for table `simpanan_tabungan`
 --
 ALTER TABLE `simpanan_tabungan`
-  MODIFY `id_simpanan_tabungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_simpanan_tabungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT untuk tabel `simpanan_wajib`
+-- AUTO_INCREMENT for table `simpanan_wajib`
 --
 ALTER TABLE `simpanan_wajib`
   MODIFY `id_simpanan_wajib` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
